@@ -1,15 +1,14 @@
 import React from 'react';
 import './App.css';
-import LandingPage from "./LandingPage"
-
+import Switch from "./views/Switch"
 
 
 function App() {
   
   return (
-    <div className="App">
-      <LandingPage/>
-    </div>
+
+    <div><Switch/></div>
+
   );
 }
 
