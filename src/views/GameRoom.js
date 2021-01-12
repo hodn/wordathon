@@ -1,48 +1,52 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { io } from 'socket.io-client';
 import { useLocation, useHistory } from "react-router-dom";
+import Button from '@material-ui/core/Button';
 
 export default function GameRoom() {
-    const socketRef = useRef();
-    const location = useLocation();
-    const history = useHistory();
-    const [room, setRoom] = useState(null); 
+  const socketRef = useRef();
+  const location = useLocation();
+  const history = useHistory();
+  const [room, setRoom] = useState(null);
 
-    useEffect(() => {
-    
-        // Creates a WebSocket connection
-        socketRef.current = io("http://localhost:5000/");
+  useEffect(() => {
 
-        if (location.roomID && location.playerName) {
-          
-          socketRef.current.emit("registerPlayer", location.playerName);
-          socketRef.current.emit("joinRoom", location.roomID); // Player joins the room he was invited to
+    // Creates a WebSocket connection
+    socketRef.current = io("http://localhost:5000/");
 
-        } else if (location.playerName) {
-          
-          socketRef.current.emit("registerPlayer", location.playerName);
-          socketRef.current.emit("createRoom"); // Player creates new room
-        
-        } else {
-          history.push("/");
-        }
-        
-        // Listens for incoming messages
-        socketRef.current.on("updateRoom", (roomState) => {
-          setRoom(roomState);
-        });
-        
-        // Destroys the socket reference
-        // when the connection is closed
-        return () => {
-          socketRef.current.disconnect();
-        };
-      }, []);
+    if (location.roomID && location.playerName) {
 
-    return (
-        
-        <div>
-            Game Room
-        </div>
-    );
+      socketRef.current.emit("registerPlayer", location.playerName);
+      socketRef.current.emit("joinRoom", location.roomID); // Player joins the room he was invited to
+
+    } else if (location.playerName) {
+
+      socketRef.current.emit("registerPlayer", location.playerName);
+      socketRef.current.emit("createRoom"); // Player creates new room
+
+    } else {
+      history.push("/");
+    }
+
+    // Listens for incoming messages
+    socketRef.current.on("updateRoom", (roomState) => {
+      setRoom(roomState);
+      console.log(roomState);
+    });
+
+    // Destroys the socket reference
+    // when the connection is closed
+    return () => {
+      socketRef.current.disconnect();
+    };
+  }, []);
+
+  return (
+
+    <div>
+      <Button variant="contained" color="primary" onClick={() => socketRef.current.emit("startGame")}>
+        Start game
+      </Button>
+    </div>
+  );
 }
