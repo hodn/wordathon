@@ -8,7 +8,7 @@ import {
 
 import GameRoom from './views/GameRoom';
 import LandingPage from './views/LandingPage';
-import JoinRoom from './views/JoinRoom';
+import JoinPage from './views/JoinPage';
 
 function App() {
 
@@ -17,7 +17,7 @@ function App() {
     <div>
       <Router>
         <RouterSwitch>
-          <Route path="/join/:roomID" component={JoinRoom} />
+          <Route path="/join/:roomID" component={JoinPage} />
           <Route exact path="/" component={LandingPage} />
           <Route exact path="/game/" component={GameRoom} />
         </RouterSwitch>

@@ -3,6 +3,8 @@ import { io } from 'socket.io-client';
 import { useLocation, useHistory } from "react-router-dom";
 import Button from '@material-ui/core/Button';
 
+import GameSettings from "../components/GameSettings";
+
 export default function GameRoom() {
   const socketRef = useRef();
   const location = useLocation();
@@ -41,10 +43,15 @@ export default function GameRoom() {
     };
   }, []);
 
+  const startGame = () => {
+    socketRef.current.emit("startGame");
+  }
+
   return (
 
     <div>
-      <Button variant="contained" color="primary" onClick={() => socketRef.current.emit("startGame")}>
+      <GameSettings room={room}/>
+      <Button variant="contained" color="primary" onClick={() => startGame()}>
         Start game
       </Button>
     </div>

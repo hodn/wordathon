@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 
-export default function JoinRoom() {
+export default function JoinPage() {
 
     const history = useHistory();
     let { roomID } = useParams();
