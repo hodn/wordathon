@@ -4,7 +4,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 
-export default function GameSettings(props) {
+export default function GameSetUp(props) {
     const room = props.room;
     const [roundDuration, setRoundDuration] = useState(90);
     const [numberOfRounds, setNumberOfRounds] = useState(5);
@@ -58,9 +58,10 @@ export default function GameSettings(props) {
                 <MenuItem value={16}>16</MenuItem>
             </Select>
 
-            <Button variant="contained" color="primary" onClick={() => startGame(roundDuration, numberOfRounds, numberOfLetters)}>
-                Start game
-            </Button>
+           {props.isOwner && 
+           <Button variant="contained" color="primary" disabled={!props.isOwner} onClick={() => startGame(roundDuration, numberOfRounds, numberOfLetters)}>
+               Start game
+            </Button>} 
         </div>
     );
 }

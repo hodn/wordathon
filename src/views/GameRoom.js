@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { io } from 'socket.io-client';
 import { useLocation, useHistory } from "react-router-dom";
 
-import GameSettings from "../components/GameSettings";
+import GameSetUp from "../components/GameSetUp";
+import ScoreBoard from '../components/ScoreBoard';
 
 export default function GameRoom() {
   const socketRef = useRef();
@@ -13,7 +14,7 @@ export default function GameRoom() {
   useEffect(() => {
 
     // Creates a WebSocket connection
-    socketRef.current = io("http://localhost:5000/");
+    socketRef.current = io("localhost:5000");
 
     if (location.roomID && location.playerName) {
 
@@ -49,7 +50,8 @@ export default function GameRoom() {
   return (
 
     <div>
-      <GameSettings room={room} emitStart={emitStart}/>
+      <GameSetUp room={room} emitStart={emitStart} isOwner={room ? socketRef.current.id === room.ownerID : false}/>
+      <ScoreBoard room={room}/>
     </div>
   );
 }
