@@ -15,14 +15,13 @@ export default function InviteLinkCard(props) {
     const copyToClipboard = () => {
         navigator.clipboard.writeText(inviteLink);
         openSnack(true);
-        
+
         setTimeout(() => {
             openSnack(false);
         }, 2000);
     }
 
     return (
-
         <div>
             <Card>
                 <CardContent>
@@ -43,14 +42,12 @@ export default function InviteLinkCard(props) {
                 </CardContent>
                 <CardActions>
                     <Button
-                        variant="primary"
                         onClick={copyToClipboard}
                     >
                         Copy link
                     </Button>
                 </CardActions>
             </Card>
-
             <Snackbar
                 anchorOrigin={{
                     vertical: 'bottom',
@@ -58,7 +55,6 @@ export default function InviteLinkCard(props) {
                 }}
                 open={snackOpen}
                 message="URL copied to clipboard"
-
             />
         </div>
     );

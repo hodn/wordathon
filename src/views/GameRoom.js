@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { io } from 'socket.io-client';
 import { useLocation, useHistory } from "react-router-dom";
-import Button from '@material-ui/core/Button';
 
 import GameSettings from "../components/GameSettings";
 
@@ -43,17 +42,14 @@ export default function GameRoom() {
     };
   }, []);
 
-  const startGame = () => {
-    socketRef.current.emit("startGame");
+  const emitStart = (settings) => {
+    socketRef.current.emit("startGame", settings);
   }
 
   return (
 
     <div>
-      <GameSettings room={room}/>
-      <Button variant="contained" color="primary" onClick={() => startGame()}>
-        Start game
-      </Button>
+      <GameSettings room={room} emitStart={emitStart}/>
     </div>
   );
 }
