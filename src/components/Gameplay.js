@@ -8,34 +8,41 @@ export default function Gameplay(props) {
     const [word, setWord] = useState("");
     const [definition, setDefinition] = useState(null);
     const [evaluations, setEvaluations] = useState([]);
+    const [pressedLetters, setPressedLetters] = useState([]);
 
     useEffect(() => {
         socket.on("evaluationReply", (reply) => {
             setDefinition(reply.definitions[0]);
             setTimeout(() => setDefinition(null), 3000);
-            setEvaluations(evaluations.push(reply)); 
+            setEvaluations(evaluations => [...evaluations, reply]); 
         });
     }, []);
 
     const addLetter = (index) => {
         setWord(`${word}${room.roundLetters[index]}`);
+        setPressedLetters(pressedLetters => [...pressedLetters, index]);
+    }
+
+    const resetInput = () => {
+        setWord("");
+        setPressedLetters([]);
     }
 
     const submitWord = (word) => {
         socket.emit("evaluateWordEntry", word);
-        setWord("");
+        resetInput();
     }
-
+    
     return (
 
         <div>
             <Typography variant="h1"> {word ? word : "........."} </Typography>
             {definition && <Typography variant="h3"> {definition} </Typography>}
             {room.roundLetters.map((letter, index) => {
-                return <Button key={index} onClick={() => addLetter(index)}>{letter}</Button>
+                return <Button key={index} disabled={pressedLetters.includes(index)} onClick={() => addLetter(index)}>{letter}</Button>
             })} <br />
             <Button disabled={word.length < 2} onClick={() => submitWord(word)}> Send </Button>
-            <Button onClick={() => setWord("")}> Clear </Button>
+            <Button onClick={resetInput}> Clear </Button>
         </div>
     );
 }
