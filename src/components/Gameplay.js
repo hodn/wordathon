@@ -12,7 +12,7 @@ export default function Gameplay(props) {
 
     useEffect(() => {
         socket.on("evaluationReply", (reply) => {
-            setDefinition(reply.definitions[0]);
+            setDefinition(reply.definitions ? reply.definitions[0] : "");
             setTimeout(() => setDefinition(null), 3000);
             setEvaluations(evaluations => [...evaluations, reply]); 
         });
@@ -43,6 +43,10 @@ export default function Gameplay(props) {
             })} <br />
             <Button disabled={word.length < 2} onClick={() => submitWord(word)}> Send </Button>
             <Button onClick={resetInput}> Clear </Button>
+
+            {evaluations.map((evaluation, index) => {
+                return <Typography variant="body" key={index}> {evaluation.word} {evaluation.result} </Typography>
+            })}
         </div>
     );
 }
