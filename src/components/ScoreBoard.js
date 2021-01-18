@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Table from '@material-ui/core/Table';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableRow from '@material-ui/core/TableRow';
@@ -36,7 +36,7 @@ export default function ScoreBoard(props) {
                     {getPlayers(room).map((player) => (
                         <TableRow key={player.ID}>
                             <TableCell component="th" scope="row">
-                                {player.name}
+                              {player.ID === props.playerID ? "|" : ""}  {player.name}
                             </TableCell>
                             <TableCell>{player.points}</TableCell> 
                         </TableRow>
