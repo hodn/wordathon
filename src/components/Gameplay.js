@@ -13,7 +13,7 @@ export default function Gameplay(props) {
         socket.on("evaluationReply", (reply) => {
             setDefinition(reply.definitions[0]);
             setTimeout(() => setDefinition(null), 3000);
-            setEvaluations([...evaluations, reply]); 
+            setEvaluations(evaluations.push(reply)); 
         });
     }, []);
 
