@@ -5,6 +5,8 @@ import { useLocation, useHistory } from "react-router-dom";
 import GameSetUp from "../components/GameSetUp";
 import ScoreBoard from '../components/ScoreBoard';
 import Gameplay from '../components/Gameplay';
+import Timer from '../components/Timer';
+
 
 export default function GameRoom() {
   const socketRef = useRef();
@@ -54,6 +56,7 @@ export default function GameRoom() {
       {room && room.round === 0 && <GameSetUp room={room} emitStart={emitStart} isOwner={socketRef.current.id === room.ownerID}/>}
       <ScoreBoard room={room} playerID={socketRef.current ? socketRef.current.id : null}/>
       {room && room.round > 0 && <Gameplay room={room} socket={socketRef.current} />}
+      {room && <Timer room={room}/>}
     </div>
   );
 }
