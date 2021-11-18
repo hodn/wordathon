@@ -9,7 +9,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 
 
 export default function InviteLinkCard(props) {
-    const inviteLink = "localhost:3000/join/" + props.ID;
+    const inviteLink = "localhost:3000/join/" + props.room.ID;
     const [snackOpen, openSnack] = React.useState(false);
 
     const copyToClipboard = () => {
@@ -43,6 +43,8 @@ export default function InviteLinkCard(props) {
                 <CardActions>
                     <Button
                         onClick={copyToClipboard}
+                        variant="contained" 
+                        color="secondary"
                     >
                         Copy link
                     </Button>

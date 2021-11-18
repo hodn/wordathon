@@ -4,10 +4,11 @@ import { useLocation, useHistory } from "react-router-dom";
 import Grid from '@material-ui/core/Grid';
 
 
-import GameSetUp from "../components/GameSetUp";
+import GameParameters from "../components/GameParameters";
 import ScoreBoard from '../components/ScoreBoard';
 import Gameplay from '../components/Gameplay';
 import Timer from '../components/Timer';
+import InviteLinkCard from '../components/InviteLinkCard';
 
 
 
@@ -64,12 +65,15 @@ export default function GameRoom() {
         alignItems="center"
         spacing={1}
       >
-        <Grid item xs={6}> {room && room.round === 0 && <GameSetUp room={room} emitStart={emitStart} isOwner={socketRef.current.id === room.ownerID} /> } </Grid>
-        <Grid item xs={6}> {room && <ScoreBoard room={room} playerID={socketRef.current ? socketRef.current.id : null} />} </Grid>
-        <Grid item xs={6}> {room && room.round > 0 && <Gameplay room={room} socket={socketRef.current} />} </Grid>
+        <Grid item xs={8}> {room && room.round === 0 && <InviteLinkCard room={room}/> } </Grid>
+        
+        <Grid item xs={4}> {room && <ScoreBoard room={room} playerID={socketRef.current ? socketRef.current.id : null} />} </Grid>
+        
+        <Grid item xs={8}> {room && room.round > 0 && <Gameplay room={room} socket={socketRef.current} />} </Grid>
       
+        <Grid item xs={12}> {room && room.round === 0 && <GameParameters room={room} emitStart={emitStart} isOwner={socketRef.current.id === room.ownerID} /> } </Grid>
         <Grid item xs={12}> {room && <Timer room={room} />} </Grid>
-      
+        
       </Grid>
     </div>
   );
