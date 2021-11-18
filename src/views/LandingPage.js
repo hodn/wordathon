@@ -7,8 +7,6 @@ import Typography from '@material-ui/core/Typography';
 import GameRules from '../components/GameRules';
 
 
-
-
 export default function LandingPage() {
 
     const history = useHistory();
