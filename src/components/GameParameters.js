@@ -71,10 +71,10 @@ export default function GameParameters(props) {
                 </FormControl>
 
 
-                {props.isOwner &&
-                    <Button variant="contained" color="primary" disabled={!props.isOwner} onClick={() => startGame(roundDuration, numberOfRounds, numberOfLetters)}>
-                        Start game
-                    </Button>}
+
+                <Button variant="contained" color="primary" onClick={() => startGame(roundDuration, numberOfRounds, numberOfLetters)}>
+                    Start game
+                </Button>
 
             </Card>
         </div>

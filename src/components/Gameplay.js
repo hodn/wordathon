@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Chip from '@material-ui/core/Chip';
 
 export default function Gameplay(props) {
     const room = props.room;
@@ -14,7 +15,7 @@ export default function Gameplay(props) {
         socket.on("evaluationReply", (reply) => {
             setDefinition(reply.definitions ? reply.definitions[0] : "");
             setTimeout(() => setDefinition(null), 3000);
-            setEvaluations(evaluations => [...evaluations, reply]); 
+            setEvaluations(evaluations => [...evaluations, reply]);
         });
     }, []);
 
@@ -32,7 +33,18 @@ export default function Gameplay(props) {
         socket.emit("evaluateWordEntry", word);
         resetInput();
     }
-    
+
+    const getChipColor = (result) => {
+        switch (result) {
+            case 1:
+                return "secondary"
+            case 2:
+                return "primary"
+            default:
+                return "default"
+        }
+    }
+
     return (
 
         <div>
@@ -41,11 +53,12 @@ export default function Gameplay(props) {
             {room.roundLetters.map((letter, index) => {
                 return <Button key={index} disabled={pressedLetters.includes(index)} onClick={() => addLetter(index)}>{letter}</Button>
             })} <br />
-            <Button disabled={word.length < 2} onClick={() => submitWord(word)}> Send </Button>
+
+            <Button disabled={word.length < 3 || !room.inRound} onClick={() => submitWord(word)}> Send </Button>
             <Button onClick={resetInput}> Clear </Button>
 
             {evaluations.map((evaluation, index) => {
-                return <Typography variant="body" key={index}> {evaluation.word} {evaluation.result} </Typography>
+                return <Chip key={index} label={evaluation.word} color={getChipColor(evaluation.result)} />
             })}
         </div>
     );

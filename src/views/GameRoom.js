@@ -71,7 +71,7 @@ export default function GameRoom() {
         
         <Grid item xs={8}> {room && room.round > 0 && <Gameplay room={room} socket={socketRef.current} />} </Grid>
       
-        <Grid item xs={12}> {room && room.round === 0 && <GameParameters room={room} emitStart={emitStart} isOwner={socketRef.current.id === room.ownerID} /> } </Grid>
+        <Grid item xs={12}> {room && room.round === 0 && socketRef.current.id === room.ownerID &&<GameParameters room={room} emitStart={emitStart} /> } </Grid>
         <Grid item xs={12}> {room && <Timer room={room} />} </Grid>
         
       </Grid>
