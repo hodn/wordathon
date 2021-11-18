@@ -3,6 +3,7 @@ import { useHistory, useParams } from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 import GameRules from '../components/GameRules';
 
 
@@ -13,13 +14,13 @@ export default function JoinPage() {
     const history = useHistory();
     let { roomID } = useParams();
     const [playerName, setPlayerName] = useState("");
-    
+
     const redirectToGameRoom = (playerName) => {
         history.push({
             pathname: '/game',
             playerName,
             roomID
-          });
+        });
     }
 
     return (
@@ -33,6 +34,13 @@ export default function JoinPage() {
             >
 
                 <Grid item>
+
+                    <Typography variant="h1">
+                        Wordathon
+                    </Typography>
+                </Grid>
+
+                <Grid item>
                     <TextField id="nickname" label="Nickname" variant="outlined"
                         onChange={(e) => setPlayerName(e.target.value)} />
                 </Grid>
@@ -44,7 +52,7 @@ export default function JoinPage() {
                 </Grid>
 
                 <Grid item>
-                    <GameRules/>
+                    <GameRules />
                 </Grid>
 
             </Grid>

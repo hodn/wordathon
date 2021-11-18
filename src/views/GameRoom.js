@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { io } from 'socket.io-client';
 import { useLocation, useHistory } from "react-router-dom";
+import Grid from '@material-ui/core/Grid';
+
 
 import GameSetUp from "../components/GameSetUp";
 import ScoreBoard from '../components/ScoreBoard';
 import Gameplay from '../components/Gameplay';
 import Timer from '../components/Timer';
+
 
 
 export default function GameRoom() {
@@ -53,10 +56,21 @@ export default function GameRoom() {
   return (
 
     <div>
-      {room && room.round === 0 && <GameSetUp room={room} emitStart={emitStart} isOwner={socketRef.current.id === room.ownerID}/>}
-      <ScoreBoard room={room} playerID={socketRef.current ? socketRef.current.id : null}/>
-      {room && room.round > 0 && <Gameplay room={room} socket={socketRef.current} />}
-      {room && <Timer room={room}/>}
+
+      <Grid
+        container
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        spacing={1}
+      >
+        <Grid item xs={6}> {room && room.round === 0 && <GameSetUp room={room} emitStart={emitStart} isOwner={socketRef.current.id === room.ownerID} /> } </Grid>
+        <Grid item xs={6}> {room && <ScoreBoard room={room} playerID={socketRef.current ? socketRef.current.id : null} />} </Grid>
+        <Grid item xs={6}> {room && room.round > 0 && <Gameplay room={room} socket={socketRef.current} />} </Grid>
+      
+        <Grid item xs={12}> {room && <Timer room={room} />} </Grid>
+      
+      </Grid>
     </div>
   );
 }
