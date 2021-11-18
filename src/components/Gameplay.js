@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Chip from '@material-ui/core/Chip';
+import Tooltip from '@material-ui/core/Tooltip';
 
 export default function Gameplay(props) {
     const room = props.room;
@@ -37,11 +38,11 @@ export default function Gameplay(props) {
     const getChipColor = (result) => {
         switch (result) {
             case 1:
-                return "secondary"
+                return "yellow";
             case 2:
-                return "primary"
+                return "green";
             default:
-                return "default"
+                return "red";
         }
     }
 
@@ -49,16 +50,24 @@ export default function Gameplay(props) {
 
         <div>
             <Typography variant="h1"> {word ? word : "........."} </Typography>
-            {definition && <Typography variant="h3"> {definition} </Typography>}
+            <Typography variant="body"> {definition ? definition : " ------"} </Typography> <br/>
+            
             {room.roundLetters.map((letter, index) => {
-                return <Button key={index} disabled={pressedLetters.includes(index)} onClick={() => addLetter(index)}>{letter}</Button>
+                return <Button variant="contained" key={index} disabled={pressedLetters.includes(index)} onClick={() => addLetter(index)}>{letter}</Button>
             })} <br />
 
             <Button disabled={word.length < 3 || !room.inRound} onClick={() => submitWord(word)}> Send </Button>
             <Button onClick={resetInput}> Clear </Button>
 
             {evaluations.map((evaluation, index) => {
-                return <Chip key={index} label={evaluation.word} color={getChipColor(evaluation.result)} />
+                return (
+                    <Tooltip key={"t" + index} title={evaluation.definitions}>
+                        <Chip style={{ background: getChipColor(evaluation.result), color: 'white' }} key={index} label={evaluation.word} />
+                    </Tooltip>
+
+
+                )
+
             })}
         </div>
     );
