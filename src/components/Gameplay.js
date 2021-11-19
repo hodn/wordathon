@@ -18,7 +18,13 @@ export default function Gameplay(props) {
             setTimeout(() => setDefinition(null), 3000);
             setEvaluations(evaluations => [...evaluations, reply]);
         });
+
     }, []);
+
+    useEffect(() => {
+        if (!room.inRound) setEvaluations([]);
+
+    }, [room]);
 
     const addLetter = (index) => {
         setWord(`${word}${room.roundLetters[index]}`);
