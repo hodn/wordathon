@@ -10,6 +10,12 @@ export default function WordCloud(props) {
         getWordTooltip: word => `${word.value} player(s) - ${word.definition}`,
     }
 
+    const options = {
+        rotations: 1,
+        rotationAngles: [0],
+        fontFamily: 'Helvetica'
+      };
+
     for (const [key, info] of Object.entries(usedWords)) {
         words.push(
             {
@@ -26,6 +32,7 @@ export default function WordCloud(props) {
             <ReactWordcloud
                 words={words}
                 callbacks={callbacks}
+                options={options}
             />
         </div>
     );

@@ -10,6 +10,7 @@ import Gameplay from '../components/Gameplay';
 import Timer from '../components/Timer';
 import InviteLinkCard from '../components/InviteLinkCard';
 import WordCloud from '../components/WordCloud';
+import Button from '@material-ui/core/Button';
 
 
 
@@ -55,6 +56,10 @@ export default function GameRoom() {
     socketRef.current.emit("startGame", settings);
   }
 
+  const emitRestart = () => {
+    socketRef.current.emit("restartGame");
+  }
+
   return (
 
     <div>
@@ -74,10 +79,13 @@ export default function GameRoom() {
 
         <Grid item xs={8}> {room && room.round > 0 && !room.inRound && <WordCloud room={room} />} </Grid>
       
-        <Grid item xs={12}> {room && room.round === 0 && socketRef.current.id === room.ownerID &&<GameParameters room={room} emitStart={emitStart} /> } </Grid>
+        <Grid item xs={12}> {room && room.round === 0 && socketRef.current.id === room.ownerID && <GameParameters room={room} emitStart={emitStart} /> } </Grid>
         <Grid item xs={12}> {room && <Timer room={room} />} </Grid>
+
+        <Button onClick={emitRestart}> Restart </Button>
         
       </Grid>
+
     </div>
   );
 }
