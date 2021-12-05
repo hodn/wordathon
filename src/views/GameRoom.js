@@ -9,6 +9,7 @@ import ScoreBoard from '../components/ScoreBoard';
 import Gameplay from '../components/Gameplay';
 import Timer from '../components/Timer';
 import InviteLinkCard from '../components/InviteLinkCard';
+import WordCloud from '../components/WordCloud';
 
 
 
@@ -21,8 +22,8 @@ export default function GameRoom() {
   useEffect(() => {
 
     // Creates a WebSocket connection
-    socketRef.current = io('https://secure-badlands-60547.herokuapp.com'); //io('http://localhost:5000')
-
+    socketRef.current = io('http://localhost:5000') // io('https://secure-badlands-60547.herokuapp.com'); 
+    
     if (location.roomID && location.playerName) {
 
       socketRef.current.emit("registerPlayer", location.playerName);
@@ -70,6 +71,8 @@ export default function GameRoom() {
         <Grid item xs={4}> {room && <ScoreBoard room={room} playerID={socketRef.current ? socketRef.current.id : null} />} </Grid>
         
         <Grid item xs={8}> {room && room.round > 0 && <Gameplay room={room} socket={socketRef.current} />} </Grid>
+
+        <Grid item xs={8}> {room && room.round > 0 && !room.inRound && <WordCloud room={room} />} </Grid>
       
         <Grid item xs={12}> {room && room.round === 0 && socketRef.current.id === room.ownerID &&<GameParameters room={room} emitStart={emitStart} /> } </Grid>
         <Grid item xs={12}> {room && <Timer room={room} />} </Grid>
