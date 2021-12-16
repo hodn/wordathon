@@ -37,6 +37,8 @@ export default function InviteLinkCard(props) {
                                 readOnly: true,
                             }}
                             variant="filled"
+                            onClick={copyToClipboard}
+                            fullWidth
                         />
                     </Typography>
                 </CardContent>
@@ -45,6 +47,7 @@ export default function InviteLinkCard(props) {
                         onClick={copyToClipboard}
                         variant="contained" 
                         color="secondary"
+                        style={{marginLeft:'auto'}}
                     >
                         Copy link
                     </Button>

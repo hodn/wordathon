@@ -8,6 +8,7 @@ export default function Gameplay(props) {
 
     const getGameState = (room) => {
 
+        if (!room) return 4; // not in the game enivronment - room
         if (room.round === 0) return 0; // Game to be started
         if (room.inRound) return 1; // Time remains
         if (!room.inRound && room.round === room.settings.numberOfRounds) {
@@ -44,6 +45,8 @@ export default function Gameplay(props) {
                 return "Next round in: ";
             case 3:
                 return "Game has ended"
+            case 4:
+                return "Let's have some fun!"
             default:
                 return "Game to be started";
         }
@@ -61,7 +64,7 @@ export default function Gameplay(props) {
     return (
 
         <div>
-            <Typography variant="h4"> {getText(getGameState(room.current))} {remainingSecs > 0 ? remainingSecs : ""} </Typography>
+            <Typography variant='body'> {getText(getGameState(room.current))} {remainingSecs > 0 ? remainingSecs : ""} </Typography>
         </div>
     );
 }
