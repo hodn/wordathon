@@ -3,12 +3,8 @@ import { useHistory, useParams } from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import GameRules from '../components/GameRules';
 import TopBar from '../components/TopBar';
-
-
-
 
 export default function JoinPage() {
 
@@ -34,13 +30,6 @@ export default function JoinPage() {
                 alignItems="center"
                 spacing={1}
             >
-
-                <Grid item>
-
-                    <Typography variant="h1">
-                        Wordathon
-                    </Typography>
-                </Grid>
 
                 <Grid item>
                     <TextField id="nickname" label="Nickname" variant="outlined"
