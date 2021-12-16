@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import GameRules from '../components/GameRules';
+import TopBar from '../components/TopBar.js';
 
 
 export default function LandingPage() {
@@ -22,6 +23,8 @@ export default function LandingPage() {
 
     return (
         <div>
+
+            <TopBar />
             <Grid
                 container
                 direction="column"
@@ -29,12 +32,6 @@ export default function LandingPage() {
                 alignItems="center"
                 spacing={1}
             >
-                <Grid item>
-                    
-                        <Typography variant="h1">
-                            Wordathon
-                        </Typography>
-                </Grid>
 
                 <Grid item>
                     <TextField id="nickname" label="Nickname" variant="outlined"
@@ -48,7 +45,7 @@ export default function LandingPage() {
                 </Grid>
 
                 <Grid item>
-                    <GameRules/>
+                    <GameRules />
                 </Grid>
 
             </Grid>

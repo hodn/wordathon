@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import GameRules from '../components/GameRules';
+import TopBar from '../components/TopBar';
 
 
 
@@ -25,6 +26,7 @@ export default function JoinPage() {
 
     return (
         <div>
+            <TopBar/>
             <Grid
                 container
                 direction="column"
