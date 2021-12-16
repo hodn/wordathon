@@ -3,7 +3,7 @@ import Accordion from '@material-ui/core/Accordion';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import Typography from '@material-ui/core/Typography';
-
+import ExpandMore from '@material-ui/icons/ExpandMore';
 
 export default function GameRules() {
 
@@ -11,7 +11,7 @@ export default function GameRules() {
         <div>
             <Accordion>
                 <AccordionSummary
-                    expandIcon='ᐯ'
+                    expandIcon={<ExpandMore />}
                     aria-controls="panel1a-content"
                     id="panel1a-header"
                 >
@@ -27,7 +27,7 @@ export default function GameRules() {
 
             <Accordion>
                 <AccordionSummary
-                    expandIcon='ᐯ'
+                    expandIcon={<ExpandMore />}
                     aria-controls="panel2a-content"
                     id="panel2a-header"
                 >

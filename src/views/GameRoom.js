@@ -11,6 +11,7 @@ import Timer from '../components/Timer';
 import InviteLinkCard from '../components/InviteLinkCard';
 import WordCloud from '../components/WordCloud';
 import Button from '@material-ui/core/Button';
+import TopBar from '../components/TopBar';
 
 
 
@@ -24,7 +25,7 @@ export default function GameRoom() {
 
     // Creates a WebSocket connection
     socketRef.current = io('http://localhost:5000') // io('https://secure-badlands-60547.herokuapp.com'); 
-    
+
     if (location.roomID && location.playerName) {
 
       socketRef.current.emit("registerPlayer", location.playerName);
@@ -61,9 +62,8 @@ export default function GameRoom() {
   }
 
   return (
-
     <div>
-
+      <TopBar />
       <Grid
         container
         direction="row"
@@ -71,19 +71,19 @@ export default function GameRoom() {
         alignItems="center"
         spacing={1}
       >
-        <Grid item xs={8}> {room && room.round === 0 && <InviteLinkCard room={room}/> } </Grid>
-        
+        <Grid item xs={8}> {room && room.round === 0 && <InviteLinkCard room={room} />} </Grid>
+
         <Grid item xs={4}> {room && <ScoreBoard room={room} playerID={socketRef.current ? socketRef.current.id : null} />} </Grid>
-        
+
         <Grid item xs={8}> {room && room.round > 0 && <Gameplay room={room} socket={socketRef.current} />} </Grid>
 
         <Grid item xs={8}> {room && room.round > 0 && !room.inRound && <WordCloud room={room} />} </Grid>
-      
-        <Grid item xs={12}> {room && room.round === 0 && socketRef.current.id === room.ownerID && <GameParameters room={room} emitStart={emitStart} /> } </Grid>
+
+        <Grid item xs={12}> {room && room.round === 0 && socketRef.current.id === room.ownerID && <GameParameters room={room} emitStart={emitStart} />} </Grid>
         <Grid item xs={12}> {room && <Timer room={room} />} </Grid>
 
         <Button onClick={emitRestart}> Restart </Button>
-        
+
       </Grid>
 
     </div>
