@@ -48,7 +48,7 @@ export default function InviteLinkCard(props) {
                     </Typography>
                 </Grid>
 
-                <Grid item style={{marginLeft: 'auto', marginRight:'auto'}}> 
+                <Grid item> 
                     <Button
                         onClick={copyToClipboard}
                         variant="contained"

@@ -43,8 +43,6 @@ export default function GameParameters(props) {
             <Grid
                 container
                 direction="column"
-                justifyContent="space-between"
-                alignItems="center"
                 spacing={1}
             >
                 <Grid item>
