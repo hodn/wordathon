@@ -23,9 +23,14 @@ export default function ScoreBoard(props) {
         return players;
     }
 
+    const generateColor = (isPlayer) => {
+        if (isPlayer) return 'red';
+        return 'black'
+    }
+
     return (
         <TableContainer component={Paper}>
-            <Table aria-label="simple table" size="small">
+            <Table size="small">
                 <TableHead>
                     <TableRow>
                         <TableCell>Player</TableCell>
@@ -35,7 +40,7 @@ export default function ScoreBoard(props) {
                 <TableBody>
                     {getPlayers(room).map((player) => (
                         <TableRow key={player.ID}>
-                            <TableCell component="th" scope="row">
+                            <TableCell style={{color: generateColor(player.ID === props.playerID)}} component="th" scope="row">
                               {player.ID === props.playerID ? "|" : ""}  {player.name}
                             </TableCell>
                             <TableCell>{player.points}</TableCell> 

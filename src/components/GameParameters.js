@@ -15,6 +15,9 @@ const useStyles = makeStyles({
     input: {
         minWidth: 90,
         margin: 5,
+    },
+    heading: {
+        marginBottom: 10
     }
 });
 
@@ -38,7 +41,7 @@ export default function GameParameters(props) {
     return (
 
         <div>
-            <Typography variant='h6'> Game settings</Typography>
+            <Typography variant='h6' className={classes.heading}> Game settings</Typography>
 
             <Grid
                 container

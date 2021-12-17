@@ -30,7 +30,7 @@ export default function WordCloud(props) {
     return (
 
         <div>
-            <Typography variant='h6'>Found words</Typography>
+            <Typography variant='h6' style={{marginBottom: 10}}>Found words</Typography>
             <ReactWordcloud
                 words={words}
                 callbacks={callbacks}

@@ -19,6 +19,9 @@ const useStyles = makeStyles({
     card: {
         margin: 10,
         padding: 10,
+    },
+    heading: {
+      marginBottom: 10
     }
 });
 
@@ -113,7 +116,7 @@ export default function GameRoom() {
         <Grid item xs={12}>
           {room && (
             <Card className={classes.card}>
-              <Typography variant='h6'>Scoreboard</Typography>
+              <Typography variant='h6' className={classes.heading}>Scoreboard</Typography>
               <ScoreBoard room={room} playerID={socketRef.current ? socketRef.current.id : null} />
             </Card>
               
