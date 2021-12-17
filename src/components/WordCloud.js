@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactWordcloud from 'react-wordcloud';
+import Typography from '@material-ui/core/Typography';
 
 export default function WordCloud(props) {
 
@@ -29,6 +30,7 @@ export default function WordCloud(props) {
     return (
 
         <div>
+            <Typography variant='h6'>Found words</Typography>
             <ReactWordcloud
                 words={words}
                 callbacks={callbacks}

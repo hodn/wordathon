@@ -3,8 +3,32 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Chip from '@material-ui/core/Chip';
 import Tooltip from '@material-ui/core/Tooltip';
+import Divider from '@material-ui/core/Divider';
+
+import { makeStyles } from '@material-ui/styles';
+
+
+const useStyles = makeStyles({
+    chip: {
+        color: 'white',
+        marginRight: 3,
+    },
+    letterButton: {
+        marginRight: 4,
+        marginTop: 4
+    },
+    text: {
+        marginBottom: 10,
+    },
+    divider: {
+        marginTop: 10,
+        marginBottom: 10,
+
+    }
+});
 
 export default function Gameplay(props) {
+    const classes = useStyles();
     const room = props.room;
     const socket = props.socket;
     const [word, setWord] = useState("");
@@ -55,26 +79,40 @@ export default function Gameplay(props) {
     return (
 
         <div>
-            <Typography variant="h1"> {word ? word : "........."} </Typography>
-            <Typography variant="body"> {definition ? definition : " ------"} </Typography> <br/>
-            
+            <Typography className={classes.text} variant="h1"> {word ? word : "___"} </Typography>
+
             {room.roundLetters.map((letter, index) => {
-                return <Button variant="contained" key={index} disabled={pressedLetters.includes(index)} onClick={() => addLetter(index)}>{letter}</Button>
-            })} <br />
+                return (
+                    <Button
+                        className={classes.letterButton}
+                        variant="contained"
+                        key={index} disabled={pressedLetters.includes(index)} onClick={() => addLetter(index)}>{letter}
+                    </Button>)
+            })}
+
+            <br />
 
             <Button disabled={word.length < 3 || !room.inRound} onClick={() => submitWord(word)}> Send </Button>
             <Button onClick={resetInput}> Clear </Button>
 
+            <br />
+
+            <Divider className={classes.divider} />
+
             {evaluations.map((evaluation, index) => {
                 return (
                     <Tooltip key={"t" + index} title={evaluation.definitions}>
-                        <Chip style={{ background: getChipColor(evaluation.result), color: 'white' }} key={index} label={evaluation.word} />
+                        <Chip className={classes.chip} style={{ background: getChipColor(evaluation.result) }} key={index} label={evaluation.word} />
                     </Tooltip>
-
-
                 )
 
             })}
+
+            <br />
+
+            <Divider className={classes.divider} />
+
+            <Typography className={classes.text} variant="body"> {definition ? definition : "___"} </Typography> <br />
         </div>
     );
 }
