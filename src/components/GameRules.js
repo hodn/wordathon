@@ -9,7 +9,7 @@ export default function GameRules() {
 
     return (
         <div>
-            <Accordion>
+            <Accordion style={{maxWidth: '60vw'}}>
                 <AccordionSummary
                     expandIcon={<ExpandMore />}
                     aria-controls="panel1a-content"
@@ -25,7 +25,7 @@ export default function GameRules() {
                 </AccordionDetails>
             </Accordion>
 
-            <Accordion>
+            <Accordion style={{maxWidth: '60vw'}}> 
                 <AccordionSummary
                     expandIcon={<ExpandMore />}
                     aria-controls="panel2a-content"
