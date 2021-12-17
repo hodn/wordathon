@@ -1,7 +1,5 @@
 import React from 'react';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
+import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
@@ -23,14 +21,21 @@ export default function InviteLinkCard(props) {
 
     return (
         <div>
-            <Card>
-                <CardContent>
-                    <Typography variant="h3">
-                        Invite your friends!
-                    </Typography>
+
+            <Typography variant='h6'> Invite friends</Typography>
+
+
+            <Grid
+                container
+                direction="column"
+                alignItems="left"
+                justifyContent="space-between"
+                spacing={1}
+            >
+
+                <Grid item>
                     <Typography>
                         <TextField
-                            id="filled-read-only-input"
                             label="Invitation link"
                             value={inviteLink}
                             InputProps={{
@@ -41,18 +46,21 @@ export default function InviteLinkCard(props) {
                             fullWidth
                         />
                     </Typography>
-                </CardContent>
-                <CardActions>
+                </Grid>
+
+                <Grid item style={{marginLeft: 'auto', marginRight:'auto'}}> 
                     <Button
                         onClick={copyToClipboard}
-                        variant="contained" 
+                        variant="contained"
                         color="secondary"
-                        style={{marginLeft:'auto'}}
+                        style={{ marginLeft: 'auto' }}
                     >
                         Copy link
                     </Button>
-                </CardActions>
-            </Card>
+                </Grid>
+
+            </Grid>
+
             <Snackbar
                 anchorOrigin={{
                     vertical: 'bottom',

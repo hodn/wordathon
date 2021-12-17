@@ -6,13 +6,24 @@ import Grid from '@material-ui/core/Grid';
 import GameParameters from "../components/GameParameters";
 import ScoreBoard from '../components/ScoreBoard';
 import Gameplay from '../components/Gameplay';
-import Timer from '../components/Timer';
 import InviteLinkCard from '../components/InviteLinkCard';
 import WordCloud from '../components/WordCloud';
 import Button from '@material-ui/core/Button';
 import TopBar from '../components/TopBar';
+import Card from '@material-ui/core/Card';
+import { makeStyles } from '@material-ui/styles';
+import { Typography } from '@material-ui/core';
+
+
+const useStyles = makeStyles({
+    card: {
+        margin: 10,
+        padding: 10,
+    }
+});
 
 export default function GameRoom() {
+  const classes = useStyles();
   const socketRef = useRef();
   const location = useLocation();
   const history = useHistory();
@@ -60,25 +71,55 @@ export default function GameRoom() {
 
   return (
     <div>
-      <TopBar room={room}/>
+      <TopBar room={room} />
       <Grid
         container
         direction="row"
         justifyContent="center"
-        alignItems="center"
-        spacing={1}
+        alignItems="stretch"
       >
-        <Grid item xs={8}> {room && room.round === 0 && <InviteLinkCard room={room} />} </Grid>
+        <Grid item xs={12}>
+          {room && room.round > 0 && (
+            <Card className={classes.card}>
+              <Gameplay room={room} socket={socketRef.current} />
+            </Card>
+          )}
+        </Grid>
 
-        <Grid item xs={4}> {room && room.round === 0 && socketRef.current.id === room.ownerID && <GameParameters room={room} emitStart={emitStart} />} </Grid>
+        <Grid item xs={12}>
+          {room && room.round > 0 && !room.inRound && (
+            <Card className={classes.card}>
+              <WordCloud room={room} />
+            </Card>
+          )}
+        </Grid>
 
-        <Grid item xs={4}> {room && <ScoreBoard room={room} playerID={socketRef.current ? socketRef.current.id : null} />} </Grid>
+        <Grid item xs={6}>
+          {room && room.round === 0 && (
+            <Card className={classes.card}>
+              <InviteLinkCard room={room} />
+            </Card>
+          )}
+        </Grid>
 
-        <Grid item xs={8}> {room && room.round > 0 && <Gameplay room={room} socket={socketRef.current} />} </Grid>
+        <Grid item xs={6}>
+          {room && room.round === 0 && socketRef.current.id === room.ownerID && (
+            <Card className={classes.card}>
+              <GameParameters room={room} emitStart={emitStart} />
+            </Card>
+          )}
+        </Grid>
 
-        <Grid item xs={8}> {room && room.round > 0 && !room.inRound && <WordCloud room={room} />} </Grid>
+        <Grid item xs={12}>
+          {room && (
+            <Card className={classes.card}>
+              <Typography variant='h6'>Scoreboard</Typography>
+              <ScoreBoard room={room} playerID={socketRef.current ? socketRef.current.id : null} />
+            </Card>
+              
+          )}
+        </Grid>
 
-        
         <Button onClick={emitRestart}> Restart </Button>
 
       </Grid>

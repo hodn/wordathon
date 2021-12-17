@@ -8,10 +8,10 @@ import Timer from '../components/Timer';
 
 export default function TopBar(props) {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1 }} style={{marginBottom: 10}}>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h3" style={{ flex: 1 }}> Wordathon </Typography>
+          <Typography variant="h4" style={{ flex: 1 }}> Wordathon </Typography>
           <Timer room={props.room} /> 
         </Toolbar>
       </AppBar>
