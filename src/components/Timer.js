@@ -55,7 +55,7 @@ export default function Gameplay(props) {
 
     const getRound = (room) => {
         if (room && room.settings && room.inRound) {
-            return `Round ${room.round}/${room.settings.numberOfRounds} - `
+            return `R (${room.round}/${room.settings.numberOfRounds}) - `
         } else return;
     }
 

@@ -24,6 +24,9 @@ const useStyles = makeStyles({
         marginTop: 10,
         marginBottom: 10,
 
+    },
+    controls:{
+        margin: 15
     }
 });
 
@@ -46,7 +49,10 @@ export default function Gameplay(props) {
     }, []);
 
     useEffect(() => {
-        if (!room.inRound) setEvaluations([]);
+        if (!room.inRound) {
+            setEvaluations([]);
+            resetInput();
+        }
 
     }, [room]);
 
@@ -92,8 +98,8 @@ export default function Gameplay(props) {
 
             <br />
 
-            <Button disabled={word.length < 3 || !room.inRound} onClick={() => submitWord(word)}> Send </Button>
-            <Button onClick={resetInput}> Clear </Button>
+            <Button className={classes.controls} color='primary' variant="contained" disabled={word.length < 3 || !room.inRound} onClick={() => submitWord(word)}> Send </Button>
+            <Button className={classes.controls} variant="outlined" onClick={resetInput}> Clear </Button>
 
             <br />
 

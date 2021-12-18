@@ -5,14 +5,15 @@ import Box from '@material-ui/core/Box';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Timer from '../components/Timer';
+import {Link} from "react-router-dom";
 
 export default function TopBar(props) {
   return (
-    <Box sx={{ flexGrow: 1 }} style={{marginBottom: 10}}>
+    <Box sx={{ flexGrow: 1 }} style={{ marginBottom: 10 }}>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h4" style={{ flex: 1 }}> Wordathon </Typography>
-          <Timer room={props.room} /> 
+          <Link to="/" style={{cursor:'default', color: 'white', textDecoration: 'none', flex: 1}}><Typography variant="h4"> Wordathon </Typography></Link>
+          <Timer room={props.room} />
         </Toolbar>
       </AppBar>
     </Box>
