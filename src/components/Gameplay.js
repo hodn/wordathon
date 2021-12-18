@@ -98,7 +98,7 @@ export default function Gameplay(props) {
 
             <br />
 
-            <Button className={classes.controls} color='primary' variant="contained" disabled={word.length < 3 || !room.inRound} onClick={() => submitWord(word)}> Send </Button>
+            <Button className={classes.controls} color='secondary' variant="contained" disabled={word.length < 3 || !room.inRound} onClick={() => submitWord(word)}> Send </Button>
             <Button className={classes.controls} variant="outlined" onClick={resetInput}> Clear </Button>
 
             <br />

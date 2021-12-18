@@ -6,22 +6,38 @@ import {
   Route
 } from "react-router-dom";
 
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
 import GameRoom from './views/GameRoom';
 import LandingPage from './views/LandingPage';
 import JoinPage from './views/JoinPage';
+
+const theme = createMuiTheme({
+  palette: {
+    type: 'light',
+    primary: {
+      main: '#1a237e',
+    },
+    secondary: {
+      main: '#ff3d00',
+    },
+  },
+});
 
 function App() {
 
   return (
 
     <div>
-      <Router>
-        <RouterSwitch>
-          <Route path="/join/:roomID" component={JoinPage} />
-          <Route exact path="/" component={LandingPage} />
-          <Route exact path="/game/" component={GameRoom} />
-        </RouterSwitch>
-      </Router>
+      <MuiThemeProvider theme={theme}>
+        <Router>
+          <RouterSwitch>
+            <Route path="/join/:roomID" component={JoinPage} />
+            <Route exact path="/" component={LandingPage} />
+            <Route exact path="/game/" component={GameRoom} />
+          </RouterSwitch>
+        </Router>
+      </MuiThemeProvider>
     </div>
 
   );

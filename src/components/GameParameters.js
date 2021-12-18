@@ -93,7 +93,7 @@ export default function GameParameters(props) {
                 </Grid>
 
                 <Grid item>
-                    <Button variant="contained" color="primary" onClick={() => startGame(roundDuration, numberOfRounds, numberOfLetters)}>
+                    <Button variant="contained" color="secondary" onClick={() => startGame(roundDuration, numberOfRounds, numberOfLetters)}>
                         Start game
                     </Button>
                 </Grid>

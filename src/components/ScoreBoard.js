@@ -24,17 +24,17 @@ export default function ScoreBoard(props) {
     }
 
     const generateColor = (isPlayer) => {
-        if (isPlayer) return 'red';
+        if (isPlayer) return '#ff3d00';
         return 'black'
     }
 
     return (
         <TableContainer component={Paper}>
             <Table size="small">
-                <TableHead>
+                <TableHead style={{background: '#ff3d00'}}>
                     <TableRow>
-                        <TableCell>Player</TableCell>
-                        <TableCell>Points</TableCell>
+                        <TableCell style={{color: 'white'}}>Player</TableCell>
+                        <TableCell style={{color: 'white'}}>Points</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>

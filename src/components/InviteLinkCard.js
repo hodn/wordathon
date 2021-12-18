@@ -52,7 +52,7 @@ export default function InviteLinkCard(props) {
                     <Button
                         onClick={copyToClipboard}
                         variant="contained"
-                        color="secondary"
+                        color="primary"
                         style={{ marginLeft: 'auto' }}
                     >
                         Copy link
