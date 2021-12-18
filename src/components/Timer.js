@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Typography from '@material-ui/core/Typography';
 
-export default function Gameplay(props) {
+export default function Timer(props) {
     const room = useRef();
     room.current = props.room;
     const [remainingSecs, setRemainingSecs] = useState(null);
