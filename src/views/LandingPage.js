@@ -29,7 +29,7 @@ export default function LandingPage() {
                 direction="column"
                 justifyContent="center"
                 alignItems="center"
-                spacing={1}
+                spacing={2}
             >
 
                 <Grid item>

@@ -148,11 +148,11 @@ export default function GameRoom() {
         open={room && room.settings.numberOfRounds === room.round && room.inRound === false}
       >
         <DialogTitle id="alert-dialog-title">
-          Congratulations
+          Congratulations!
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            {room ? getBestPlayer(room).name : 'N/A'} won with {room? getBestPlayer(room).points : 'N/A'} points!
+            {room ? getBestPlayer(room).name : 'N/A'} won with {room ? getBestPlayer(room).points : 'N/A'} points!
           </DialogContentText>
         </DialogContent>
         <DialogActions>

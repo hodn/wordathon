@@ -28,7 +28,7 @@ export default function JoinPage() {
                 direction="column"
                 justifyContent="center"
                 alignItems="center"
-                spacing={1}
+                spacing={2}
             >
 
                 <Grid item>
