@@ -1,13 +1,13 @@
 {
   "main.css": "/wordathon/static/css/main.4b2358a0.chunk.css",
-  "main.js": "/wordathon/static/js/main.654cb9a2.chunk.js",
-  "main.js.map": "/wordathon/static/js/main.654cb9a2.chunk.js.map",
+  "main.js": "/wordathon/static/js/main.8a3124a7.chunk.js",
+  "main.js.map": "/wordathon/static/js/main.8a3124a7.chunk.js.map",
   "runtime~main.js": "/wordathon/static/js/runtime~main.e8a0a593.js",
   "runtime~main.js.map": "/wordathon/static/js/runtime~main.e8a0a593.js.map",
   "static/js/2.a86d8f14.chunk.js": "/wordathon/static/js/2.a86d8f14.chunk.js",
   "static/js/2.a86d8f14.chunk.js.map": "/wordathon/static/js/2.a86d8f14.chunk.js.map",
   "index.html": "/wordathon/index.html",
-  "precache-manifest.6cec53e96f710e99f1c79aefe2ea5f29.js": "/wordathon/precache-manifest.6cec53e96f710e99f1c79aefe2ea5f29.js",
+  "precache-manifest.362457855b2d20b9b1329262419d2b84.js": "/wordathon/precache-manifest.362457855b2d20b9b1329262419d2b84.js",
   "service-worker.js": "/wordathon/service-worker.js",
   "static/css/main.4b2358a0.chunk.css.map": "/wordathon/static/css/main.4b2358a0.chunk.css.map"
 }
