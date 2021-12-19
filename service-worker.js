@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/wordathon/precache-manifest.90ab593836b40196a567f445f72c6551.js"
+  "/wordathon/precache-manifest.b60bbb4966960d768c83e922c7b5b81f.js"
 );
 
 workbox.clientsClaim();
