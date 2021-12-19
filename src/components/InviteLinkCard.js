@@ -7,7 +7,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 
 
 export default function InviteLinkCard(props) {
-    const inviteLink = "localhost:3000/join/" + props.room.ID;
+    const inviteLink = "https://hodn.github.io/wordathon/join/" + props.room.ID;
     const [snackOpen, openSnack] = React.useState(false);
 
     const copyToClipboard = () => {
