@@ -3,7 +3,8 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Chip from '@material-ui/core/Chip';
 import Tooltip from '@material-ui/core/Tooltip';
-import Divider from '@material-ui/core/Divider';
+import Paper from '@material-ui/core/Paper';
+
 
 import { makeStyles } from '@material-ui/styles';
 
@@ -12,22 +13,30 @@ const useStyles = makeStyles({
     chip: {
         color: 'white',
         marginRight: 3,
+        marginTop: 5
     },
     letterButton: {
         marginRight: 4,
         marginTop: 4
     },
     text: {
-        marginBottom: 10,
+        marginTop: 20,
+        marginBottom: 20,
     },
-    divider: {
-        marginTop: 10,
-        marginBottom: 10,
-
+    controls: {
+        marginTop: 15,
+        marginBottom: 20
     },
-    controls:{
-        margin: 15
-    }
+    controlButton: {
+        marginRight: 10
+    },
+    paper: {
+        padding: 10,
+        margin: 10
+    },
+    definition: {
+        marginTop: 30,
+    },
 });
 
 export default function Gameplay(props) {
@@ -74,18 +83,18 @@ export default function Gameplay(props) {
     const getChipColor = (result) => {
         switch (result) {
             case 1:
-                return "yellow";
+                return "#ffb74d";
             case 2:
                 return "green";
             default:
-                return "red";
+                return "grey";
         }
     }
 
     return (
 
         <div>
-            <Typography className={classes.text} variant="h1"> {word ? word : "___"} </Typography>
+            <Typography className={classes.text} variant="h1"> {word ? word : '\u3000'} </Typography>
 
             {room.roundLetters.map((letter, index) => {
                 return (
@@ -98,27 +107,28 @@ export default function Gameplay(props) {
 
             <br />
 
-            <Button className={classes.controls} color='secondary' variant="contained" disabled={word.length < 3 || !room.inRound} onClick={() => submitWord(word)}> Send </Button>
-            <Button className={classes.controls} variant="outlined" onClick={resetInput}> Clear </Button>
+            <div className={classes.controls}>
+                <Button className={classes.controlButton} color='secondary' variant="contained" disabled={word.length < 3 || !room.inRound} onClick={() => submitWord(word)}> Send </Button>
+                <Button className={classes.controlButton} color='primary' variant="outlined" onClick={resetInput}> Clear </Button>
+            </div>
 
-            <br />
+            <Paper className={classes.paper}>
 
-            <Divider className={classes.divider} />
+                {evaluations.map((evaluation, index) => {
+                    return (
+                        <Tooltip key={"t" + index} title={evaluation.definitions}>
+                            <Chip className={classes.chip} style={{ background: getChipColor(evaluation.result) }} key={index} label={evaluation.word} />
+                        </Tooltip>
+                    )
 
-            {evaluations.map((evaluation, index) => {
-                return (
-                    <Tooltip key={"t" + index} title={evaluation.definitions}>
-                        <Chip className={classes.chip} style={{ background: getChipColor(evaluation.result) }} key={index} label={evaluation.word} />
-                    </Tooltip>
-                )
+                })}
 
-            })}
+            </Paper>
 
-            <br />
+            <Paper className={classes.paper}>
+                <Typography className={classes.definition} variant="body"> {definition ? definition : '\u3000'} </Typography>
+            </Paper>
 
-            <Divider className={classes.divider} />
-
-            <Typography className={classes.text} variant="body"> {definition ? definition : "___"} </Typography> <br />
         </div>
     );
 }

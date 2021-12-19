@@ -16,8 +16,8 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
   card: {
-    margin: 10,
-    padding: 10,
+    margin: 15,
+    padding: 20,
   },
   heading: {
     marginBottom: 10
