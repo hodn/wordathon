@@ -30,7 +30,7 @@ function App() {
 
     <div>
       <MuiThemeProvider theme={theme}>
-        <Router>
+        <Router basename={process.env.PUBLIC_URL}>
           <RouterSwitch>
             <Route path="/join/:roomID" component={JoinPage} />
             <Route exact path="/" component={LandingPage} />
