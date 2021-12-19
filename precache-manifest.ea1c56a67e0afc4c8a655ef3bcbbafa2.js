@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "ff70bfd0bdd6ce14142b",
+    "revision": "8de08483d97f94a8777f",
     "url": "/wordathon/static/css/main.4b2358a0.chunk.css"
   },
   {
-    "revision": "ff70bfd0bdd6ce14142b",
-    "url": "/wordathon/static/js/main.a01a6eb5.chunk.js"
+    "revision": "8de08483d97f94a8777f",
+    "url": "/wordathon/static/js/main.413a8ed3.chunk.js"
   },
   {
     "revision": "a2ba4f47e34b97520e4a",
@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/wordathon/static/js/2.843a72be.chunk.js"
   },
   {
-    "revision": "9afd4e7e09dbacd0aec8df5f011c9ae0",
+    "revision": "da9a00e9f1231a8e5d388bf228263ee8",
     "url": "/wordathon/index.html"
   }
 ];
