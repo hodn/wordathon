@@ -34,7 +34,7 @@ export default function GameRoom() {
   useEffect(() => {
 
     // Creates a WebSocket connection
-    socketRef.current = io('http://localhost:5000') // io('https://secure-badlands-60547.herokuapp.com'); 
+    socketRef.current = io('https://secure-badlands-60547.herokuapp.com'); //io('http://localhost:5000') 
 
     if (location.roomID && location.playerName) {
 
