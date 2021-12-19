@@ -7,7 +7,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 
 
 export default function InviteLinkCard(props) {
-    const inviteLink = window.location.href.split('/')[2] + '/' + window.location.href.split('/')[3] +"/join/" + props.room.ID;
+    const inviteLink = 'https://' + window.location.href.split('/')[2] + '/' + window.location.href.split('/')[3] +"/join/" + props.room.ID;
     const [snackOpen, openSnack] = React.useState(false);
 
     const copyToClipboard = () => {
