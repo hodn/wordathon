@@ -12,9 +12,11 @@ export default function WordCloud(props) {
     }
 
     const options = {
+        deterministic: true,
+        fontFamily: 'Helvetica',
+        fontSizes: [24, 100],
         rotations: 1,
-        rotationAngles: [0],
-        fontFamily: 'Helvetica'
+        rotationAngles: [0]
       };
 
     for (const [key, info] of Object.entries(usedWords)) {
