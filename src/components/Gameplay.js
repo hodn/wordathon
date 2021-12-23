@@ -16,8 +16,10 @@ const useStyles = makeStyles({
         marginTop: 5
     },
     letterButton: {
-        marginRight: 4,
-        marginTop: 4
+        marginRight: 10,
+        marginTop: 10, 
+        width: 70,
+        height: 50
     },
     text: {
         marginTop: 20,
