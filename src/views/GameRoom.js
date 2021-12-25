@@ -116,7 +116,7 @@ export default function GameRoom() {
           {room && (
             <Card className={classes.card}>
               <Typography variant='h6' className={classes.heading}>Scoreboard</Typography>
-              <ScoreBoard room={room} playerID={socketRef.current ? socketRef.current.id : null} />
+              <ScoreBoard room={room} playerID={socketRef.current ? socketRef.current.id : null} emitRestart={emitRestart} />
             </Card>
 
           )}

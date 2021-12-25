@@ -5,6 +5,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
+import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 
 export default function ScoreBoard(props) {
@@ -30,6 +31,8 @@ export default function ScoreBoard(props) {
 
     return (
         <TableContainer component={Paper}>
+            {room && room.settings.numberOfRounds === room.round && room.inRound === false && 
+            <Button room={room} onClick={props.emitRestart} variant='contained' color='primary' style={{margin:10}}> Restart game </Button>}
             <Table size="small">
                 <TableHead style={{background: '#ff3d00'}}>
                     <TableRow>
