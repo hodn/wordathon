@@ -96,9 +96,8 @@ export default function Gameplay(props) {
     return (
 
         <div>
-            <Typography className={classes.text} variant="h1"> {word ? word : '\u3000'} </Typography>
-
-            {room.roundLetters.map((letter, index) => {
+            {room.inRound && <Typography className={classes.text} variant="h3"> {word ? word : '\u3000'} </Typography>}
+            {room.inRound && room.roundLetters.map((letter, index) => {
                 return (
                     <Button
                         className={classes.letterButton}
