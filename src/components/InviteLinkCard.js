@@ -14,7 +14,7 @@ export default function InviteLinkCard(props) {
         title: 'Wordathon',
         text: room.players[room.ownerID].name + ' challenges you to a game!',
         url: inviteLink
-      }
+    }
 
     const copyToClipboard = () => {
         navigator.clipboard.writeText(inviteLink);
@@ -25,12 +25,12 @@ export default function InviteLinkCard(props) {
         }, 2000);
     }
 
-    const shareLink = async() => {
+    const shareLink = async () => {
         try {
             await navigator.share(dataShare)
-          } catch(err) {
-              console.log(err);
-          }
+        } catch (err) {
+            console.log(err);
+        }
     }
 
     return (
@@ -63,18 +63,16 @@ export default function InviteLinkCard(props) {
                 </Grid>
 
                 <Grid item>
-                   <Button
+                    {navigator.canShare && <Button
                         onClick={shareLink}
                         variant="contained"
                         color="primary"
                         style={{ marginLeft: 'auto' }}
                     >
                         Share invite
-                    </Button>
+                    </Button>}
 
-                    <br/>
-
-                    {!navigator.canShare &&<Button
+                    {!navigator.canShare && <Button
                         onClick={copyToClipboard}
                         variant="contained"
                         color="primary"
