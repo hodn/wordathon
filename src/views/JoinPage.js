@@ -37,7 +37,7 @@ export default function JoinPage() {
                 </Grid>
 
                 <Grid item>
-                    <Button variant="contained" color="primary" onClick={() => redirectToGameRoom(playerName)}>
+                    <Button variant="contained" color="secondary" onClick={() => redirectToGameRoom(playerName)}>
                         Join game
                     </Button>
                 </Grid>
