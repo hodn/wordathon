@@ -11,6 +11,8 @@ import WordCloud from '../components/WordCloud';
 import EndDialog from '../components/EndDialog';
 import TopBar from '../components/TopBar';
 import Card from '@material-ui/core/Card';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 import { makeStyles } from '@material-ui/styles';
 import Typography from '@material-ui/core/Typography';
 
@@ -30,6 +32,8 @@ export default function GameRoom() {
   const location = useLocation();
   const history = useHistory();
   const [room, setRoom] = useState(null);
+  const [lostConnection, setLostConnection] = useState(false);
+
 
   useEffect(() => {
 
@@ -56,6 +60,11 @@ export default function GameRoom() {
       console.log(roomState);
     });
 
+    // Listens for disconnect 
+    socketRef.current.on("disconnect", () => {
+      setLostConnection(true);
+    });
+
     // Destroys the socket reference
     // when the connection is closed
     return () => {
@@ -74,7 +83,13 @@ export default function GameRoom() {
   return (
     <div>
       <TopBar room={room} />
-      <Grid
+      
+      {lostConnection && <Alert severity="error">
+        <AlertTitle>Connection lost</AlertTitle>
+        You disconnected from the game. Re-open game invite or refer back to the main page.
+      </Alert>}
+      <
+        Grid
         container
         direction="row"
         justifyContent="center"
@@ -122,7 +137,7 @@ export default function GameRoom() {
           )}
         </Grid>
       </Grid>
-      {room && room.settings.numberOfRounds === room.round && room.inRound === false && <EndDialog room={room} emitRestart={emitRestart}/>}
+      {room && room.settings.numberOfRounds === room.round && room.inRound === false && <EndDialog room={room} emitRestart={emitRestart} />}
     </div>
   );
 }
