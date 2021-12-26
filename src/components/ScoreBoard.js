@@ -18,9 +18,9 @@ export default function ScoreBoard(props) {
                 players.push(room.players[playerID]);
             }
         }
-        players.sort(function(a, b) {
+        players.sort(function (a, b) {
             return b.points - a.points;
-          });
+        });
         return players;
     }
 
@@ -30,28 +30,31 @@ export default function ScoreBoard(props) {
     }
 
     return (
-        <TableContainer component={Paper}>
-            {room && room.settings.numberOfRounds === room.round && room.inRound === false && 
-            <Button room={room} onClick={props.emitRestart} variant='contained' color='primary' style={{margin:10}}> Restart game </Button>}
-            <Table size="small">
-                <TableHead style={{background: '#ff3d00'}}>
-                    <TableRow>
-                        <TableCell style={{color: 'white'}}>Player</TableCell>
-                        <TableCell style={{color: 'white'}}>Points</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {getPlayers(room).map((player) => (
-
-                        <TableRow key={player.ID}>
-                            <TableCell style={{fontWeight: generateFont(player.ID === props.playerID)}} component="th" scope="row">
-                              {player.ID === props.playerID ? "|" : ""}  {player.name}
-                            </TableCell>
-                            <TableCell style={{fontWeight: generateFont(player.ID === props.playerID)}} >{player.points}</TableCell> 
+        <div>
+            {room && room.settings.numberOfRounds === room.round && room.inRound === false &&
+                <Button room={room} onClick={props.emitRestart} variant='contained' color='primary' style={{ margin: 10, marginLeft: 'auto' }}> Restart game </Button>}
+            <TableContainer component={Paper}>
+                <Table size="small">
+                    <TableHead style={{ background: '#ff3d00' }}>
+                        <TableRow>
+                            <TableCell style={{ color: 'white' }}>Player</TableCell>
+                            <TableCell style={{ color: 'white' }}>Points</TableCell>
                         </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+                    </TableHead>
+                    <TableBody>
+                        {getPlayers(room).map((player) => (
+
+                            <TableRow key={player.ID}>
+                                <TableCell style={{ fontWeight: generateFont(player.ID === props.playerID) }} component="th" scope="row">
+                                    {player.ID === props.playerID ? "|" : ""}  {player.name}
+                                </TableCell>
+                                <TableCell style={{ fontWeight: generateFont(player.ID === props.playerID) }} >{player.points}</TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </div>
+
     );
 }
