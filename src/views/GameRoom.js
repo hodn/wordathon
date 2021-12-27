@@ -13,6 +13,7 @@ import TopBar from '../components/TopBar';
 import Card from '@material-ui/core/Card';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
+import LinearProgress from '@mui/material/LinearProgress';
 import { makeStyles } from '@material-ui/styles';
 import Typography from '@material-ui/core/Typography';
 
@@ -33,6 +34,7 @@ export default function GameRoom() {
   const history = useHistory();
   const [room, setRoom] = useState(null);
   const [lostConnection, setLostConnection] = useState(false);
+  const [isConnecting, setIsConnecting] = useState(true);
 
 
   useEffect(() => {
@@ -59,7 +61,10 @@ export default function GameRoom() {
       setRoom(roomState);
       console.log(roomState);
     });
-
+    // Listens for connect 
+    socketRef.current.on("connect", () => {
+      setIsConnecting(false);
+    });
     // Listens for disconnect 
     socketRef.current.on("disconnect", () => {
       setLostConnection(true);
@@ -83,13 +88,16 @@ export default function GameRoom() {
   return (
     <div>
       <TopBar room={room} />
-      
-      {lostConnection && <Alert severity="error">
+
+      {isConnecting && <LinearProgress />}
+
+      {lostConnection && 
+      <Alert severity="error">
         <AlertTitle>Connection lost</AlertTitle>
         You disconnected from the game. Re-open game invite or refer back to the main page.
       </Alert>}
-      <
-        Grid
+
+      <Grid
         container
         direction="row"
         justifyContent="center"
