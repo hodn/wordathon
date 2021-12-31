@@ -29,7 +29,10 @@ export default function LandingPage() {
                 justifyContent="center"
                 alignItems="center"
                 spacing={3}
-                xs={12}
+                style={{
+                    margin: 0,
+                    width: '100%',
+                  }}
             >
 
                 <Grid item>
