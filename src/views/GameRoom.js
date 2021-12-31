@@ -92,10 +92,11 @@ export default function GameRoom() {
 
       {isConnecting && <ColoredLinearProgress />}
 
-      {lostConnection && 
+      {true && 
       <Alert severity="error" style={{marginBottom: 15}}>
         <AlertTitle>Connection lost</AlertTitle>
-        You disconnected from the game. Re-open game invite or refer back to the main page.
+        <p>You disconnected from the game. Re-open the game invite or refer back to the main page.</p>
+        <p>Use SHARE INVITE on mobile devices to prevent disconnection caused by multitasking.</p>
       </Alert>}
 
       <Grid
