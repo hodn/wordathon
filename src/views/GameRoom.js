@@ -8,12 +8,12 @@ import ScoreBoard from '../components/ScoreBoard';
 import Gameplay from '../components/Gameplay';
 import InviteLinkCard from '../components/InviteLinkCard';
 import WordCloud from '../components/WordCloud';
+import ColoredLinearProgress from '../components/ColoredLinearProgress';
 import EndDialog from '../components/EndDialog';
 import TopBar from '../components/TopBar';
 import Card from '@material-ui/core/Card';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
-import LinearProgress from '@mui/material/LinearProgress';
 import { makeStyles } from '@material-ui/styles';
 import Typography from '@material-ui/core/Typography';
 
@@ -91,7 +91,7 @@ export default function GameRoom() {
     <div>
       <TopBar room={room} />
 
-      {isConnecting && <LinearProgress />}
+      {isConnecting && <ColoredLinearProgress />}
 
       {lostConnection && 
       <Alert severity="error">
