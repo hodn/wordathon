@@ -22,14 +22,13 @@ export default function LandingPage() {
 
     return (
         <div>
-
             <TopBar />
             <Grid
                 container
                 direction="column"
                 justifyContent="center"
                 alignItems="center"
-                spacing={2}
+                spacing={3}
             >
 
                 <Grid item>
@@ -38,7 +37,7 @@ export default function LandingPage() {
                 </Grid>
 
                 <Grid item>
-                    <Button variant="contained" color="primary" onClick={() => redirectToGameRoom(playerName)}>
+                    <Button size='large' variant="contained" color="primary" onClick={() => redirectToGameRoom(playerName)}>
                         Create game
                     </Button>
                 </Grid>
@@ -48,7 +47,6 @@ export default function LandingPage() {
                 </Grid>
 
             </Grid>
-
         </div>
     );
 }

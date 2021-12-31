@@ -28,7 +28,7 @@ export default function JoinPage() {
                 direction="column"
                 justifyContent="center"
                 alignItems="center"
-                spacing={2}
+                spacing={3}
             >
 
                 <Grid item>
@@ -37,7 +37,7 @@ export default function JoinPage() {
                 </Grid>
 
                 <Grid item>
-                    <Button variant="contained" color="secondary" onClick={() => redirectToGameRoom(playerName)}>
+                    <Button size='large' variant="contained" color="secondary" onClick={() => redirectToGameRoom(playerName)}>
                         Join game
                     </Button>
                 </Grid>

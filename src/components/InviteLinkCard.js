@@ -36,7 +36,7 @@ export default function InviteLinkCard(props) {
     return (
         <div>
 
-            <Typography variant='h6' style={{ marginBottom: 10 }}> Invite friends</Typography>
+            <Typography variant='h5' style={{ marginBottom: 10 }}> Invite friends</Typography>
 
 
             <Grid

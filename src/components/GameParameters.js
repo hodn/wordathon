@@ -41,7 +41,7 @@ export default function GameParameters(props) {
     return (
 
         <div>
-            <Typography variant='h6' className={classes.heading}> Game settings</Typography>
+            <Typography variant='h5' className={classes.heading}> Game settings</Typography>
 
             <Grid
                 container
