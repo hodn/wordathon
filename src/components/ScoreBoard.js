@@ -7,6 +7,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
 
 export default function ScoreBoard(props) {
     const room = props.room;
@@ -29,10 +30,17 @@ export default function ScoreBoard(props) {
         return 'normal'
     }
 
+    const getRound = (room) => {
+        if (room && room.settings && (room.round > 0)) {
+            return `- Round (${room.round}/${room.settings.numberOfRounds})`
+        } else return;
+    }
+
     return (
         <div>
             {room && room.settings.numberOfRounds === room.round && room.inRound === false &&
                 <Button room={room} onClick={props.emitRestart} variant='contained' color='primary' style={{ margin: 10, marginLeft: 'auto' }}> Restart game </Button>}
+            <Typography variant='h5' style={{marginBottom: 10}}>Scoreboard {getRound(room)}</Typography>
             <TableContainer component={Paper}>
                 <Table size="small">
                     <TableHead style={{ background: '#ff3d00' }}>

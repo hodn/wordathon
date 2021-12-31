@@ -53,12 +53,6 @@ export default function Timer(props) {
 
     }
 
-    const getRound = (room) => {
-        if (room && room.settings && room.inRound) {
-            return `R (${room.round}/${room.settings.numberOfRounds}) - `
-        } else return;
-    }
-
     useEffect(() => {
         const timer = setInterval(() => {
             calculateSeconds(room.current);
@@ -70,7 +64,7 @@ export default function Timer(props) {
     return (
 
         <div>
-            <Typography variant='body'> {getRound(room.current)} {getText(getGameState(room.current))} {remainingSecs > 0 ? remainingSecs : ""} </Typography>
+            <Typography variant='body'> {getText(getGameState(room.current))} {remainingSecs > 0 ? remainingSecs : ""} </Typography>
         </div>
     );
 }

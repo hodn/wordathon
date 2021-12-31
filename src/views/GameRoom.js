@@ -15,7 +15,6 @@ import Card from '@material-ui/core/Card';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import { makeStyles } from '@material-ui/styles';
-import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
   card: {
@@ -24,9 +23,6 @@ const useStyles = makeStyles({
     marginLeft: 15,
     marginRight: 15
   },
-  heading: {
-    marginBottom: 10
-  }
 });
 
 export default function GameRoom() {
@@ -140,7 +136,6 @@ export default function GameRoom() {
         <Grid item xs={12}>
           {room && (
             <Card className={classes.card}>
-              <Typography variant='h5' className={classes.heading}>Scoreboard</Typography>
               <ScoreBoard room={room} playerID={socketRef.current ? socketRef.current.id : null} emitRestart={emitRestart} />
             </Card>
 
