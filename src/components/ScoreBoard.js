@@ -35,7 +35,7 @@ export default function ScoreBoard(props) {
                 <Button room={room} onClick={props.emitRestart} variant='contained' color='primary' style={{ margin: 10, marginLeft: 'auto' }}> Restart game </Button>}
             <TableContainer component={Paper}>
                 <Table size="small">
-                    <TableHead style={{ background: '#ff3d00' }}>
+                    <TableHead style={{ background: '#ef6c00' }}>
                         <TableRow>
                             <TableCell style={{ color: 'white' }}>Player</TableCell>
                             <TableCell style={{ color: 'white' }}>Points</TableCell>
