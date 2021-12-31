@@ -29,6 +29,7 @@ export default function JoinPage() {
                 justifyContent="center"
                 alignItems="center"
                 spacing={3}
+                xs={12}
             >
 
                 <Grid item>
