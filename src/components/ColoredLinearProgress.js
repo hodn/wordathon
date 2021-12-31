@@ -14,7 +14,7 @@ const styles = props => ({
     backgroundColor: 'grey',
   },
   barColorPrimary: {
-    backgroundColor: '#ef6c00',
+    backgroundColor: '#ff3d00',
   }
 });
 
