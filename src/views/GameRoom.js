@@ -19,8 +19,10 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
   card: {
-    margin: 15,
     padding: 20,
+    marginBottom: 15,
+    marginLeft: 15,
+    marginRight: 15
   },
   heading: {
     marginBottom: 10
@@ -119,7 +121,7 @@ export default function GameRoom() {
           )}
         </Grid>
 
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           {room && room.round === 0 && (
             <Card className={classes.card}>
               <InviteLinkCard room={room} />
@@ -127,7 +129,7 @@ export default function GameRoom() {
           )}
         </Grid>
 
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           {room && room.round === 0 && socketRef.current.id === room.ownerID && (
             <Card className={classes.card}>
               <GameParameters room={room} emitStart={emitStart} />
@@ -138,7 +140,7 @@ export default function GameRoom() {
         <Grid item xs={12}>
           {room && (
             <Card className={classes.card}>
-              <Typography variant='h6' className={classes.heading}>Scoreboard</Typography>
+              <Typography variant='h5' className={classes.heading}>Scoreboard</Typography>
               <ScoreBoard room={room} playerID={socketRef.current ? socketRef.current.id : null} emitRestart={emitRestart} />
             </Card>
 
