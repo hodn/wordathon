@@ -37,10 +37,10 @@ export default function GameRules() {
                         <p>The main goal of the game is to <strong>form nouns</strong> from the provided letters. The more words and the longer words, the better!</p>
                         <h3>For each existing noun you receive:</h3>
                         <ul>
-                            <li><span style={{ backgroundColor: '#ffb74d', color: 'white' }}>20 points</span> for an existing noun</li>
-                            <li>40 points <strong>X</strong> the letter count</li>
+                            <li><span style={{color: '#ffffff', backgroundColor: '#ff9900'}}>20 points</span> <strong>X</strong> the letter count</li>
+                            <li><span style={{color: '#ffffff', backgroundColor: '#339966'}}>extra 100 points</span> for using it as a first player in the round</li>
+                            <li>extra 300 points for <em>5 or more</em> lettered word</li>
                         </ul>
-                        <p>If the noun <em>has not</em> yet been used in the round, you get <span style={{ backgroundColor: 'green', color: 'white' }}>extra 20 points</span>.</p>
                         <p>Enjoy!</p>
                     </Typography>
                 </AccordionDetails>
