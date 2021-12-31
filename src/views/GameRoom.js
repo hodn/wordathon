@@ -61,7 +61,6 @@ export default function GameRoom() {
     // Listens for incoming messages
     socketRef.current.on("updateRoom", (roomState) => {
       setRoom(roomState);
-      console.log(roomState);
     });
     // Listens for connect 
     socketRef.current.on("connect", () => {
@@ -94,7 +93,7 @@ export default function GameRoom() {
       {isConnecting && <ColoredLinearProgress />}
 
       {lostConnection && 
-      <Alert severity="error">
+      <Alert severity="error" style={{marginBottom: 15}}>
         <AlertTitle>Connection lost</AlertTitle>
         You disconnected from the game. Re-open game invite or refer back to the main page.
       </Alert>}
