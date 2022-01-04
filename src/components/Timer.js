@@ -38,7 +38,7 @@ export default function Timer(props) {
             setRemainingSecs(time);
 
             if (time === '0' && room.inRound) audioEnd.play();
-            if (time === (room.settings.roundDuration).toString() && room.inRound) audioStart.play();
+            if (time === (room.settings.roundDuration - 1).toString() && room.inRound) audioStart.play();
         }
 
     }
