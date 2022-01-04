@@ -5,6 +5,8 @@ export default function Timer(props) {
     const room = useRef();
     room.current = props.room;
     const [remainingSecs, setRemainingSecs] = useState(null);
+    const audioStart = new Audio('https://audio.code.org/goal1.mp3');
+    const audioEnd= new Audio('https://audio.code.org/losepoint2.mp3');
 
     const getGameState = (room) => {
 
@@ -32,8 +34,13 @@ export default function Timer(props) {
         if (!millis) {
             setRemainingSecs(null);
         } else {
-            setRemainingSecs((millis / 1000).toFixed(0));
+            const time = (millis / 1000).toFixed(0);
+            setRemainingSecs(time);
+
+            if (time === '0' && room.inRound) audioEnd.play();
+            if (time === (room.settings.roundDuration).toString() && room.inRound) audioStart.play();
         }
+
     }
 
     const getText = (gameState) => {
