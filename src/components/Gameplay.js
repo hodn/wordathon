@@ -22,7 +22,7 @@ const useStyles = makeStyles({
         marginTop: 10,
         width: 85,
         height: 70,
-        fontSize: 24
+        fontSize: 24,
     },
     text: {
         marginTop: 20,
