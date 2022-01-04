@@ -4,6 +4,8 @@ import Typography from '@material-ui/core/Typography';
 import Chip from '@material-ui/core/Chip';
 import Tooltip from '@material-ui/core/Tooltip';
 import Paper from '@material-ui/core/Paper';
+import Stack from '@mui/material/Stack';
+
 
 
 import { makeStyles } from '@material-ui/styles';
@@ -17,9 +19,9 @@ const useStyles = makeStyles({
     },
     letterButton: {
         marginRight: 10,
-        marginTop: 10, 
-        width: 70,
-        height: 50
+        marginTop: 10,
+        width: 85,
+        height: 70
     },
     text: {
         marginTop: 20,
@@ -27,10 +29,11 @@ const useStyles = makeStyles({
     },
     controls: {
         marginTop: 15,
-        marginBottom: 20
+        marginBottom: 25
     },
     controlButton: {
-        marginRight: 10
+        marginRight: 10,
+        width: 100
     },
     paper: {
         padding: 10,
@@ -39,6 +42,10 @@ const useStyles = makeStyles({
     definition: {
         marginTop: 30,
     },
+    letterBox: {
+        margin: 'auto',
+        textAlign: 'center',
+    }
 });
 
 export default function Gameplay(props) {
@@ -77,6 +84,15 @@ export default function Gameplay(props) {
         setPressedLetters([]);
     }
 
+    const deleteInput = () => {
+        if (word.length > 0) {
+            setWord(word.slice(0, -1));
+            const alreadyPressedLetters = [...pressedLetters];
+            alreadyPressedLetters.splice(-1);
+            setPressedLetters(alreadyPressedLetters);
+        }
+    }
+
     const submitWord = (word) => {
         socket.emit("evaluateWordEntry", word);
         resetInput();
@@ -96,22 +112,31 @@ export default function Gameplay(props) {
     return (
 
         <div>
-            {room.inRound && <Typography className={classes.text} variant="h3"> {word ? word : '\u3000'} </Typography>}
-            {room.inRound && room.roundLetters.map((letter, index) => {
-                return (
-                    <Button
-                        className={classes.letterButton}
-                        variant="contained"
-                        key={index} disabled={pressedLetters.includes(index)} onClick={() => addLetter(index)}>{letter}
-                    </Button>)
-            })}
+            <Stack
+                direction="column"
+                justifyContent="center"
+                alignItems="center"
+            >
+                {room.inRound && <Typography className={classes.text} variant="h5"> {word ? word : '\u3000'} </Typography>}
 
-            <br />
+                <div className={classes.letterBox}>
+                    {room.inRound && room.roundLetters.map((letter, index) => {
+                        return (
+                            <Button
+                                className={classes.letterButton}
+                                variant="contained"
+                                key={index} disabled={pressedLetters.includes(index)} onClick={() => addLetter(index)}>{letter}
+                            </Button>)
+                    })}
+                </div>
 
-            <div className={classes.controls}>
-                <Button className={classes.controlButton} color='secondary' variant="contained" disabled={word.length < 3 || !room.inRound} onClick={() => submitWord(word)}> Send </Button>
-                <Button className={classes.controlButton} color='primary' variant="outlined" onClick={resetInput}> Clear </Button>
-            </div>
+
+                <div className={classes.controls}>
+                    <Button className={classes.controlButton} color='secondary' variant="contained" disabled={word.length < 3 || !room.inRound} onClick={() => submitWord(word)}> Send </Button>
+                    <Button className={classes.controlButton} color='primary' variant="outlined" onClick={deleteInput}> Delete </Button>
+                </div>
+            </Stack>
+
 
             <Paper className={classes.paper}>
 
