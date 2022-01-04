@@ -92,7 +92,7 @@ export default function GameRoom() {
       <Alert severity="error" style={{marginBottom: 15}}>
         <AlertTitle>Connection lost</AlertTitle>
         <p>You disconnected from the game. Re-open the game invite or refer back to the main page.</p>
-        <p>Use SHARE INVITE on mobile devices to prevent disconnection caused by multitasking.</p>
+        <p>TIP: Use SHARE INVITE on mobile devices to prevent disconnection caused by multitasking.</p>
       </Alert>}
 
       <Grid
