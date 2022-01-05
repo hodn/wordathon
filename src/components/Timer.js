@@ -63,7 +63,7 @@ export default function Timer(props) {
     useEffect(() => {
         const timer = setInterval(() => {
             calculateSeconds(room.current);
-        }, 500)
+        }, 1000)
 
         return () => clearInterval(timer);
     }, []);
