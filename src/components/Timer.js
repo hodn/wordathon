@@ -37,7 +37,7 @@ export default function Timer(props) {
             const time = (millis / 1000).toFixed(0);
             setRemainingSecs(time);
 
-            if (time === '0' && room.inRound) audioEnd.play();
+            if (time === '1' && room.inRound) audioEnd.play();
             if (time === (room.settings.roundDuration - 1).toString() && room.inRound) audioStart.play();
         }
 
