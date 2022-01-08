@@ -20,8 +20,8 @@ const useStyles = makeStyles({
     letterButton: {
         marginRight: 10,
         marginTop: 10,
-        width: 85,
-        height: 70,
+        width: 60,
+        height: 50,
         fontSize: 24,
     },
     text: {
@@ -34,7 +34,8 @@ const useStyles = makeStyles({
     },
     controlButton: {
         marginRight: 10,
-        width: 100
+        width: 100,
+        height: 50
     },
     paper: {
         padding: 10,
