@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import GameRules from '../components/GameRules';
 import TopBar from '../components/TopBar.js';
+import Footer from '../components/Footer';
 
 
 export default function LandingPage() {
@@ -51,6 +52,7 @@ export default function LandingPage() {
                 </Grid>
 
             </Grid>
+            <Footer/>
         </div>
     );
 }
