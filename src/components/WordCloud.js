@@ -13,7 +13,16 @@ export default function WordCloud(props) {
 
     const options = {
         deterministic: true,
-        fontFamily: 'Helvetica',
+        fontFamily: [
+            'Futura',
+            'Roboto',
+            '"Helvetica Neue"',
+            'Arial',
+            'sans-serif',
+            '"Apple Color Emoji"',
+            '"Segoe UI Emoji"',
+            '"Segoe UI Symbol"',
+          ].join(','),
         fontSizes: [24, 100],
         rotations: 1,
         rotationAngles: [0]

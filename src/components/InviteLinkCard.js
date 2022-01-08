@@ -44,7 +44,7 @@ export default function InviteLinkCard(props) {
                 direction="column"
                 alignItems="left"
                 justifyContent="space-between"
-                spacing={1}
+                spacing={2}
             >
 
                 <Grid item>

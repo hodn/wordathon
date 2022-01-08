@@ -46,7 +46,7 @@ export default function GameParameters(props) {
             <Grid
                 container
                 direction="column"
-                spacing={1}
+                spacing={2}
             >
                 <Grid item>
                     <FormControl className={classes.input}>

@@ -40,9 +40,6 @@ const useStyles = makeStyles({
         padding: 10,
         margin: 10
     },
-    definition: {
-        marginTop: 30,
-    },
     letterBox: {
         margin: 'auto',
         textAlign: 'center',
@@ -153,7 +150,7 @@ export default function Gameplay(props) {
             </Paper>
 
             <Paper className={classes.paper}>
-                <Typography className={classes.definition} variant="body"> {definition ? definition : '\u3000'} </Typography>
+                <Typography variant="subtitle2"> {definition ? definition : '\u3000'} </Typography>
             </Paper>
 
         </div>

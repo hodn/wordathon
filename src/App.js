@@ -16,11 +16,23 @@ const theme = createMuiTheme({
   palette: {
     type: 'light',
     primary: {
-      main: '#1a237e',
+      main: '#00838f',
     },
     secondary: {
       main: '#ff3d00',
     },
+  },
+  typography: {
+    fontFamily: [
+      'Futura',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
   },
 });
 
