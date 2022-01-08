@@ -35,7 +35,7 @@ const useStyles = makeStyles({
     controlButton: {
         marginRight: 10,
         width: 100,
-        height: 50
+        height: 45
     },
     paper: {
         padding: 10,
