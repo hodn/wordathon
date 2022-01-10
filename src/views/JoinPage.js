@@ -5,7 +5,6 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import GameRules from '../components/GameRules';
 import TopBar from '../components/TopBar';
-import Footer from '../components/Footer';
 
 export default function JoinPage() {
 
@@ -52,7 +51,6 @@ export default function JoinPage() {
                 </Grid>
 
             </Grid>
-            <Footer/>
         </div>
     );
 }

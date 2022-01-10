@@ -53,7 +53,7 @@ export default function Timer(props) {
             case 3:
                 return "Game has ended"
             case 4:
-                return ""
+                return (<Typography>Made by <a href="https://github.com/hodn">hodn</a></Typography>)
             default:
                 return "Game to be started";
         }
