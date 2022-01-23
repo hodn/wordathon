@@ -23,6 +23,7 @@ const useStyles = makeStyles({
         width: 60,
         height: 50,
         fontSize: 24,
+        touchAction: 'none'
     },
     text: {
         marginTop: 20,
@@ -35,7 +36,8 @@ const useStyles = makeStyles({
     controlButton: {
         marginRight: 10,
         width: 100,
-        height: 45
+        height: 45, 
+        touchAction: 'none'
     },
     paper: {
         padding: 10,
@@ -44,9 +46,6 @@ const useStyles = makeStyles({
     letterBox: {
         margin: 'auto',
         textAlign: 'center',
-    },
-    game: {
-        touchAction: 'none'
     }
 });
 
@@ -113,7 +112,7 @@ export default function Gameplay(props) {
 
     return (
 
-        <div className={classes.game}>
+        <div>
             <Stack
                 direction="column"
                 justifyContent="center"
