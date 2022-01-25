@@ -142,7 +142,7 @@ export default function GameRoom() {
           )}
         </Grid>
       </Grid>
-      {room && room.settings.numberOfRounds === room.round && room.inRound === false && <EndDialog room={room} emitRestart={emitRestart} />}
+      {room && room.settings.numberOfRounds === room.round && room.inRound === false && <EndDialog room={room} />}
     </div>
   );
 }

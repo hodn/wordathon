@@ -45,9 +45,6 @@ export default function EndDialog(props) {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={props.emitRestart} autoFocus variant='contained' color='primary'>
-                        Restart game
-                    </Button>
                     <Button onClick={handleClose} variant='contained' color='secondary'>
                         Close
                     </Button>
