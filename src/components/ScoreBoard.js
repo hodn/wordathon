@@ -54,7 +54,7 @@ export default function ScoreBoard(props) {
 
                             <TableRow key={player.ID}>
                                 <TableCell style={{ fontWeight: generateFont(player.ID === props.playerID) }} component="th" scope="row">
-                                    {player.ID === props.playerID ? "|" : ""}  {player.name}
+                                    {player.ID === props.playerID ? "• " : ""}  {player.name}
                                 </TableCell>
                                 <TableCell style={{ fontWeight: generateFont(player.ID === props.playerID) }} >{player.points}</TableCell>
                             </TableRow>
