@@ -33,6 +33,7 @@ export default function GameRoom() {
   const [room, setRoom] = useState(null);
   const [lostConnection, setLostConnection] = useState(false);
   const [isConnecting, setIsConnecting] = useState(true);
+  const [disconnectReason, setDisconnectReason] = useState("");
 
 
   useEffect(() => {
@@ -63,7 +64,8 @@ export default function GameRoom() {
       setIsConnecting(false);
     });
     // Listens for disconnect 
-    socketRef.current.on("disconnect", () => {
+    socketRef.current.on("disconnect", (reason) => {
+      setDisconnectReason(reason)
       setLostConnection(true);
     });
 
@@ -93,6 +95,7 @@ export default function GameRoom() {
         <AlertTitle>Connection lost</AlertTitle>
         <p>You disconnected from the game. Re-open the game invite or refer back to the main page.</p>
         <p>TIP: Use SHARE INVITE on mobile devices to prevent disconnection caused by multitasking.</p>
+        <p>{disconnectReason}</p>
       </Alert>}
 
       <Grid
