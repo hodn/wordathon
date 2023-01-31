@@ -90,21 +90,21 @@ export default function GameRoom() {
 
       {isConnecting && <ColoredLinearProgress />}
 
-      {lostConnection && 
-      <Alert severity="error" style={{marginBottom: 15}}>
-        <AlertTitle>Connection lost</AlertTitle>
-        <p>You disconnected from the game. Re-open the game invite or refer back to the main page.</p>
-        <p>TIP: Use SHARE INVITE on mobile devices to prevent disconnection caused by multitasking.</p>
-        <p>{disconnectReason}</p>
-      </Alert>}
+      {lostConnection &&
+        <Alert severity="error" style={{ marginBottom: 15 }}>
+          <AlertTitle>Connection lost</AlertTitle>
+          <p>You disconnected from the game. Re-open the game invite or refer back to the main page.</p>
+          <p>TIP: Use SHARE INVITE on mobile devices to prevent disconnection caused by multitasking.</p>
+          <p>Reason: {disconnectReason}</p>
+        </Alert>}
 
       <Grid
         container
-        direction="row"
+        direction='row'
         justifyContent="center"
         alignItems="stretch"
       >
-        <Grid item xs={12}>
+        <Grid item xs={12} md={12}>
           {room && room.round > 0 && (
             <Card className={classes.card}>
               <Gameplay room={room} socket={socketRef.current} />
@@ -112,7 +112,7 @@ export default function GameRoom() {
           )}
         </Grid>
 
-        <Grid item xs={12}>
+        <Grid item xs={12} md={12}>
           {room && room.round > 0 && !room.inRound && (
             <Card className={classes.card}>
               <WordCloud room={room} />
@@ -120,7 +120,7 @@ export default function GameRoom() {
           )}
         </Grid>
 
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={4}>
           {room && room.round === 0 && (
             <Card className={classes.card}>
               <InviteLinkCard room={room} />
@@ -128,7 +128,7 @@ export default function GameRoom() {
           )}
         </Grid>
 
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={4}>
           {room && room.round === 0 && socketRef.current.id === room.ownerID && (
             <Card className={classes.card}>
               <GameParameters room={room} emitStart={emitStart} />
@@ -136,7 +136,7 @@ export default function GameRoom() {
           )}
         </Grid>
 
-        <Grid item xs={12}>
+        <Grid item xs={12} md={4}>
           {room && (
             <Card className={classes.card}>
               <ScoreBoard room={room} playerID={socketRef.current ? socketRef.current.id : null} emitRestart={emitRestart} />

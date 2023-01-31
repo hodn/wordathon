@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Snackbar from '@material-ui/core/Snackbar';
+import QRCode from "react-qr-code";
 
 
 export default function InviteLinkCard(props) {
@@ -36,18 +37,24 @@ export default function InviteLinkCard(props) {
     return (
         <div>
 
-            <Typography variant='h5' style={{ marginBottom: 10 }}> Invite friends</Typography>
+            <Typography variant='h5' style={{ marginBottom: 5 }}> Invite friends</Typography>
+            <Typography variant='subtitle1' style={{ marginBottom: 5 }}> Friends can scan & play!</Typography>
 
 
             <Grid
                 container
-                direction="column"
-                alignItems="left"
-                justifyContent="space-between"
-                spacing={2}
+                spacing={5}
             >
+                <Grid item xs={12}  md={4}>
+                    
+                    <QRCode
+                        size={150}
+                        value={inviteLink}
+                    />
 
-                <Grid item>
+                </Grid>
+
+                <Grid item xs={12} md={8}>
                     <Typography>
                         <TextField
                             label="Invitation link"
@@ -56,18 +63,17 @@ export default function InviteLinkCard(props) {
                                 readOnly: true,
                             }}
                             variant="filled"
+                            style={{ width: "100%" }}
                             onClick={copyToClipboard}
                             fullWidth
                         />
                     </Typography>
-                </Grid>
-
-                <Grid item>
+                    
                     {navigator.canShare && <Button
                         onClick={shareLink}
                         variant="contained"
                         color="primary"
-                        style={{ marginLeft: 'auto' }}
+                        style={{ marginLeft: 'auto', marginTop: 20 }}
                     >
                         Share invite
                     </Button>}
@@ -76,7 +82,7 @@ export default function InviteLinkCard(props) {
                         onClick={copyToClipboard}
                         variant="contained"
                         color="primary"
-                        style={{ marginLeft: 'auto' }}
+                        style={{ marginLeft: 'auto', marginTop: 20 }}
                     >
                         Copy link
                     </Button>}
