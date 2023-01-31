@@ -43,7 +43,7 @@ export default function ScoreBoard(props) {
             <Typography variant='h5' style={{marginBottom: 10}}>Scoreboard {getRound(room)}</Typography>
             <TableContainer component={Paper}>
                 <Table size="small">
-                    <TableHead style={{ background: '#ff3d00' }}>
+                    <TableHead style={{ background: '#00838f' }}>
                         <TableRow>
                             <TableCell style={{ color: 'white' }}>Player</TableCell>
                             <TableCell style={{ color: 'white' }}>Points</TableCell>
