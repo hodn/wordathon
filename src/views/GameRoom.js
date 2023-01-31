@@ -129,14 +129,6 @@ export default function GameRoom() {
         </Grid>
 
         <Grid item xs={12} md={4}>
-          {room && room.round === 0 && socketRef.current.id === room.ownerID && (
-            <Card className={classes.card}>
-              <GameParameters room={room} emitStart={emitStart} />
-            </Card>
-          )}
-        </Grid>
-
-        <Grid item xs={12} md={4}>
           {room && (
             <Card className={classes.card}>
               <ScoreBoard room={room} playerID={socketRef.current ? socketRef.current.id : null} emitRestart={emitRestart} />
@@ -144,6 +136,16 @@ export default function GameRoom() {
 
           )}
         </Grid>
+
+        <Grid item xs={12} md={4}>
+          {room && room.round === 0 && socketRef.current.id === room.ownerID && (
+            <Card className={classes.card}>
+              <GameParameters room={room} emitStart={emitStart} />
+            </Card>
+          )}
+        </Grid>
+
+       
       </Grid>
       {room && room.settings.numberOfRounds === room.round && room.inRound === false && <EndDialog room={room} />}
     </div>
