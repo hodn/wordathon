@@ -38,9 +38,7 @@ export default function ScoreBoard(props) {
 
     return (
         <div>
-            {room && room.settings.numberOfRounds === room.round && room.inRound === false &&
-                <Button room={room} onClick={props.emitRestart} variant='contained' color='primary' style={{ margin: 10, marginLeft: 'auto' }}> Restart game </Button>}
-            <Typography variant='h5' style={{marginBottom: 10}}>Scoreboard {getRound(room)}</Typography>
+            <Typography variant='h5' style={{ marginBottom: 10 }}>Scoreboard {getRound(room)}</Typography>
             <TableContainer component={Paper}>
                 <Table size="small">
                     <TableHead style={{ background: '#00838f' }}>
@@ -62,6 +60,10 @@ export default function ScoreBoard(props) {
                     </TableBody>
                 </Table>
             </TableContainer>
+
+            {room && room.settings.numberOfRounds === room.round && room.inRound === false &&
+                <Button room={room} onClick={props.emitRestart} variant='contained' color='secondary' style={{ marginTop: 20, marginLeft: 'auto' }}> Restart game </Button>}
+
         </div>
 
     );
