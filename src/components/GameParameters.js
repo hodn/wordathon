@@ -1,28 +1,25 @@
 import React, { useState } from 'react';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import Button from '@material-ui/core/Button';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import Button from '@mui/material/Button';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
 
-
-import { makeStyles } from '@material-ui/styles';
-
-
-const useStyles = makeStyles({
-    input: {
-        minWidth: 90,
-        margin: 5,
-    },
-    heading: {
-        marginBottom: 10
-    }
-});
+// Removed makeStyles import to kill the @mui/styles dependency
 
 export default function GameParameters(props) {
-    const classes = useStyles();
+    // Define styles as a plain object for the sx prop
+    const styles = {
+        input: {
+            minWidth: 120, // Slightly increased for better label visibility in v6
+            margin: '5px',
+        },
+        heading: {
+            marginBottom: '10px'
+        }
+    };
 
     const [roundDuration, setRoundDuration] = useState(60);
     const [numberOfRounds, setNumberOfRounds] = useState(5);
@@ -34,14 +31,15 @@ export default function GameParameters(props) {
             numberOfRounds,
             numberOfLetters
         }
-
         props.emitStart(settings);
     }
 
     return (
-
         <div>
-            <Typography variant='h5' className={classes.heading}> Game settings</Typography>
+            {/* Swapped className for sx prop */}
+            <Typography variant='h5' sx={styles.heading}>
+                Game settings
+            </Typography>
 
             <Grid
                 container
@@ -49,11 +47,13 @@ export default function GameParameters(props) {
                 spacing={2}
             >
                 <Grid item>
-                    <FormControl className={classes.input}>
-                        <InputLabel>Rounds</InputLabel>
+                    <FormControl sx={styles.input}>
+                        <InputLabel id="round-label">Rounds</InputLabel>
                         <Select
+                            labelId="round-label"
                             id="roundSelect"
                             value={numberOfRounds}
+                            label="Rounds" // Required in v6 for the label to float correctly
                             onChange={(event) => { setNumberOfRounds(event.target.value) }}
                         >
                             <MenuItem value={3}>3</MenuItem>
@@ -62,11 +62,13 @@ export default function GameParameters(props) {
                         </Select>
                     </FormControl>
 
-                    <FormControl className={classes.input}>
-                        <InputLabel>Round time</InputLabel>
+                    <FormControl sx={styles.input}>
+                        <InputLabel id="duration-label">Round time</InputLabel>
                         <Select
+                            labelId="duration-label"
                             id="durationSelect"
                             value={roundDuration}
+                            label="Round time"
                             onChange={(event) => { setRoundDuration(event.target.value) }}
                         >
                             <MenuItem value={30}>30 s</MenuItem>
@@ -76,13 +78,13 @@ export default function GameParameters(props) {
                         </Select>
                     </FormControl>
 
-                    <FormControl className={classes.input}>
-                        <InputLabel>Difficulty</InputLabel>
+                    <FormControl sx={styles.input}>
+                        <InputLabel id="difficulty-label">Difficulty</InputLabel>
                         <Select
-                            id="roundSelect"
+                            labelId="difficulty-label"
+                            id="difficultySelect"
                             value={numberOfLetters}
-                            label='Number of letters'
-
+                            label='Difficulty'
                             onChange={(event) => { setNumberOfLetters(event.target.value) }}
                         >
                             <MenuItem value={8}>Hard</MenuItem>
@@ -93,13 +95,15 @@ export default function GameParameters(props) {
                 </Grid>
 
                 <Grid item>
-                    <Button variant="contained" color="secondary" onClick={() => startGame(roundDuration, numberOfRounds, numberOfLetters)}>
+                    <Button 
+                        variant="contained" 
+                        color="secondary" 
+                        onClick={() => startGame(roundDuration, numberOfRounds, numberOfLetters)}
+                    >
                         Start game
                     </Button>
                 </Grid>
-
             </Grid>
-
         </div>
     );
 }

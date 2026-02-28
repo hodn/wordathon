@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Typography from '@material-ui/core/Typography';
+import Typography from '@mui/material/Typography';
 
 export default function Timer(props) {
     const room = useRef();

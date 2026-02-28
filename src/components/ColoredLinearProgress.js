@@ -1,21 +1,17 @@
-import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import LinearProgress from '@material-ui/core/LinearProgress';
+import React from 'react';
+import LinearProgress from '@mui/material/LinearProgress';
+import { styled } from '@mui/material/styles';
 
-class ColoredLinearProgress extends Component {
-  render() {
-    const { classes } = this.props;
-    return <LinearProgress {...this.props} classes={{colorPrimary: classes.colorPrimary, barColorPrimary: classes.barColorPrimary}}/>;
-  }
-}
-
-const styles = props => ({
-  colorPrimary: {
-    backgroundColor: 'grey',
-  },
-  barColorPrimary: {
+// This replaces the const styles and withStyles wrapper
+const CustomizedProgress = styled(LinearProgress)(({ theme }) => ({
+  backgroundColor: 'grey',
+  '& .MuiLinearProgress-bar': {
     backgroundColor: '#ff3d00',
-  }
-});
+  },
+}));
 
-export default  withStyles(styles)(ColoredLinearProgress);
+const ColoredLinearProgress = (props) => {
+  return <CustomizedProgress {...props} />;
+};
+
+export default ColoredLinearProgress;

@@ -2,19 +2,22 @@ import React from 'react';
 import './App.css';
 import {
   HashRouter as Router,
-  Switch as RouterSwitch,
+  Routes, // Replaces Switch
   Route
 } from "react-router-dom";
 
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+// Updated imports for MUI v6
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline'; // Recommended for consistent MUI styles
 
 import GameRoom from './views/GameRoom';
 import LandingPage from './views/LandingPage';
 import JoinPage from './views/JoinPage';
 
-const theme = createMuiTheme({
+// createMuiTheme is now createTheme
+const theme = createTheme({
   palette: {
-    type: 'light',
+    mode: 'light', // 'type' is now 'mode'
     primary: {
       main: '#00838f',
     },
@@ -37,21 +40,21 @@ const theme = createMuiTheme({
 });
 
 function App() {
-
   return (
-
-    <div>
-      <MuiThemeProvider theme={theme}>
-        <Router basename={process.env.PUBLIC_URL}>
-          <RouterSwitch>
-            <Route path="/join/:roomID" component={JoinPage} />
-            <Route exact path="/" component={LandingPage} />
-            <Route exact path="/game/" component={GameRoom} />
-          </RouterSwitch>
-        </Router>
-      </MuiThemeProvider>
-    </div>
-
+    <ThemeProvider theme={theme}>
+      {/* CssBaseline kicks in standard MUI resets */}
+      <CssBaseline /> 
+      
+      {/* Vite handles the base path automatically, no need for process.env.PUBLIC_URL */}
+      <Router>
+        <Routes>
+          {/* v6 uses 'element' prop with JSX syntax instead of 'component' */}
+          <Route path="/join/:roomID" element={<JoinPage />} />
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/game" element={<GameRoom />} />
+        </Routes>
+      </Router>
+    </ThemeProvider>
   );
 }
 
