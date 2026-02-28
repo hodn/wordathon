@@ -17,7 +17,7 @@
     "react-dom": "^19.2.4",
     "react-qr-code": "^2.0.18",
     "react-router-dom": "^7.13.1",
-    "react-scripts": "^0.0.0",
+    "react-scripts": "^5.0.1",
     "react-wordcloud": "^1.0.5",
     "socket.io-client": "^4.8.3"
   },
