@@ -65,6 +65,8 @@ export default function WordCloud(props) {
                             title={word.definition} 
                             arrow 
                             placement="top"
+                            enterTouchDelay={0}
+                            leaveTouchDelay={3000}
                         >
                             <Chip
                                 label={`${word.text} (${word.count})`}
@@ -73,7 +75,8 @@ export default function WordCloud(props) {
                                 sx={{ 
                                     fontSize: word.count > 1 ? '1.1rem' : '0.9rem',
                                     fontWeight: word.count > 1 ? 'bold' : 'normal',
-                                    m: 0.5 
+                                    m: 0.5,
+                                    cursor: 'pointer'
                                 }}
                             />
                         </Tooltip>
