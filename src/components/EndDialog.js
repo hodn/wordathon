@@ -43,6 +43,12 @@ export default function EndDialog(props) {
                     <DialogContentText id="alert-dialog-description">
                         {room ? getBestPlayer(room).name : 'N/A'} won with {room ? getBestPlayer(room).points : 'N/A'} points!
                     </DialogContentText>
+                    <DialogContentText sx={{ marginTop: 2 }}>
+                        A total of {room ? room.wordPool.reduce((total, pool) => total + Object.keys(pool).length, 0) : 0} unique words were found across all rounds.
+                    </DialogContentText>
+                    <DialogContentText sx={{ marginTop: 1, fontStyle: 'italic' }}>
+                        Check out the word cloud summary below!
+                    </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} variant='contained' color='secondary'>

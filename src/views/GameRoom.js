@@ -44,7 +44,7 @@ export default function GameRoom() {
   };
 
   useEffect(() => {
-    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001';
     
     // 1. Setup Socket with reconnection attempts enabled
     socketRef.current = io(apiUrl, {
@@ -80,7 +80,7 @@ export default function GameRoom() {
     // 3. Socket Event Listeners
     socketRef.current.on("updateRoom", (roomState) => {
       // Capture the roomID once the room is created/joined
-      if (roomState?.roomID) sessionStorage.setItem('roomID', roomState.roomID);
+      if (roomState?.ID) sessionStorage.setItem('roomID', roomState.ID);
       setRoom(roomState);
       setLostConnection(false); // Clear error on successful update
     });

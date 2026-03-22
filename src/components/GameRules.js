@@ -33,7 +33,7 @@ export default function GameRules() {
                     <Typography>Game rules</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <Typography>
+                    <div style={{ textAlign: 'left' }}>
                         <p>The main goal of the game is to <strong>form nouns</strong> from the provided letters. The more words and the longer words, the better!</p>
                         <h3>For each existing noun you receive:</h3>
                         <ul>
@@ -42,7 +42,7 @@ export default function GameRules() {
                             <li><span style={{ color: '#ffffff', backgroundColor: 'hotpink' }}>extra 300 points</span> for <em>5 or more</em> lettered word</li>
                         </ul>
                         <p>Enjoy!</p>
-                    </Typography>
+                    </div>
                 </AccordionDetails>
             </Accordion>
 

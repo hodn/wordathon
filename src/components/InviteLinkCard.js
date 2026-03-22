@@ -55,19 +55,17 @@ export default function InviteLinkCard(props) {
                 </Grid>
 
                 <Grid item xs={12} md={8}>
-                    <Typography>
-                        <TextField
-                            label="Invitation link"
-                            value={inviteLink}
-                            InputProps={{
-                                readOnly: true,
-                            }}
-                            variant="filled"
-                            style={{ width: "100%" }}
-                            onClick={copyToClipboard}
-                            fullWidth
-                        />
-                    </Typography>
+                    <TextField
+                        label="Invitation link"
+                        value={inviteLink}
+                        InputProps={{
+                            readOnly: true,
+                        }}
+                        variant="filled"
+                        style={{ width: "100%" }}
+                        onClick={copyToClipboard}
+                        fullWidth
+                    />
                     
                     {navigator.canShare && <Button
                         onClick={shareLink}

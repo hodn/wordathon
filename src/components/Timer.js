@@ -53,7 +53,7 @@ export default function Timer(props) {
             case 3:
                 return "Game has ended"
             case 4:
-                return (<Typography>Made by <a href="https://github.com/hodn">hodn</a></Typography>)
+                return (<span>Made by <a href="https://github.com/hodn" style={{color: 'inherit'}}>hodn</a></span>)
             default:
                 return "Game to be started";
         }
@@ -71,7 +71,7 @@ export default function Timer(props) {
     return (
 
         <div>
-            <Typography variant='body1'> {getText(getGameState(room.current))} {remainingSecs > 0 ? remainingSecs : ""} </Typography>
+            <Typography variant='body1' component="div"> {getText(getGameState(room.current))} {remainingSecs > 0 ? remainingSecs : ""} </Typography>
         </div>
     );
 }
