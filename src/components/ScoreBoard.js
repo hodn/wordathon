@@ -36,6 +36,15 @@ export default function ScoreBoard(props) {
         } else return;
     }
 
+    const renderReadyStatus = (player, room) => {
+        if (room && !room.inRound && room.round > 0 && room.round < room.settings.numberOfRounds) {
+            if (room.readyPlayers && room.readyPlayers.includes(player.ID)) {
+                return ' ✅';
+            }
+        }
+        return '';
+    }
+
     return (
         <div>
             <Typography variant='h5' style={{ marginBottom: 10 }}>Scoreboard {getRound(room)}</Typography>
@@ -52,7 +61,7 @@ export default function ScoreBoard(props) {
 
                             <TableRow key={player.ID}>
                                 <TableCell style={{ fontWeight: generateFont(player.ID === props.playerID) }} component="th" scope="row">
-                                    {player.ID === props.playerID ? "• " : ""}  {player.name}
+                                    {player.ID === props.playerID ? "• " : ""}  {player.name} {renderReadyStatus(player, room)}
                                 </TableCell>
                                 <TableCell style={{ fontWeight: generateFont(player.ID === props.playerID) }} >{player.points}</TableCell>
                             </TableRow>

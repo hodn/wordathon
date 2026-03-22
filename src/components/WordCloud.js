@@ -4,9 +4,10 @@ import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
 import Tooltip from '@mui/material/Tooltip';
 import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 
 export default function WordCloud(props) {
-    const { room } = props;
+    const { room, socket, playerID } = props;
 
     const words = useMemo(() => {
         let usedWords = room.roundWordPool;
@@ -44,11 +45,40 @@ export default function WordCloud(props) {
         return wordsArr.sort((a, b) => b.count - a.count || a.text.localeCompare(b.text));
     }, [room]);
 
+    const isGameEnded = room.round === room.settings.numberOfRounds;
+    const isReady = room.readyPlayers?.includes(playerID);
+
+    const handleReady = () => {
+        if (socket) socket.emit("toggleReady");
+    };
+
+    const handleForceStart = () => {
+        if (socket) socket.emit("forceStartNextRound");
+    };
+
     return (
         <Box sx={{ width: '100%' }}>
-            <Typography variant='h6' style={{ marginBottom: 15 }}>
-                {room.round === room.settings.numberOfRounds && !room.inRound ? "Game Summary" : "Found words"}
-            </Typography>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2, flexWrap: 'wrap', gap: 2 }}>
+                <Typography variant='h6'>
+                    {isGameEnded ? "Game Summary" : "Found words"}
+                </Typography>
+                {!isGameEnded && (
+                    <Box sx={{ display: 'flex', gap: 1 }}>
+                        {room.ownerID === playerID && (
+                            <Button variant="outlined" color="secondary" onClick={handleForceStart}>
+                                Force Start
+                            </Button>
+                        )}
+                        <Button 
+                            variant="contained" 
+                            color={isReady ? "success" : "primary"} 
+                            onClick={handleReady}
+                        >
+                            {isReady ? "Ready ✅" : "Ready"}
+                        </Button>
+                    </Box>
+                )}
+            </Box>
             
             {words.length > 0 ? (
                 <Stack 

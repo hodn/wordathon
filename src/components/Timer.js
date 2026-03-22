@@ -27,9 +27,6 @@ export default function Timer(props) {
         if (gameState === 1) {
             millis = room.roundEndTime - Date.now();
         }
-        if (gameState === 2) {
-            millis = room.roundNextStart - Date.now();
-        }
 
         if (!millis) {
             setRemainingSecs(null);
@@ -49,7 +46,7 @@ export default function Timer(props) {
             case 1:
                 return "Time left: ";
             case 2:
-                return "Next round in: ";
+                return "Waiting for players...";
             case 3:
                 return "Game has ended"
             case 4:

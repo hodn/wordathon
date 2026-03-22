@@ -13,7 +13,7 @@ export default function InviteLinkCard(props) {
     const room = props.room;
     const dataShare = {
         title: 'Wordathon',
-        text: room.players[room.ownerID].name + ' challenges you to a game!',
+        text: (room.players[room.ownerID]?.name || 'A player') + ' challenges you to a game!',
         url: inviteLink
     }
 

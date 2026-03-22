@@ -30,6 +30,7 @@ export default function GameRoom() {
   const [room, setRoom] = useState(null);
   const [lostConnection, setLostConnection] = useState(false);
   const [isConnecting, setIsConnecting] = useState(true);
+  const [isSocketConnected, setIsSocketConnected] = useState(false);
   const [disconnectReason, setDisconnectReason] = useState("");
 
   // Helper to re-register the player on the server
@@ -79,20 +80,32 @@ export default function GameRoom() {
 
     // 3. Socket Event Listeners
     socketRef.current.on("updateRoom", (roomState) => {
+      if (!roomState) {
+        sessionStorage.removeItem('roomID');
+        navigate("/");
+        return;
+      }
       // Capture the roomID once the room is created/joined
       if (roomState?.ID) sessionStorage.setItem('roomID', roomState.ID);
       setRoom(roomState);
       setLostConnection(false); // Clear error on successful update
     });
 
+    socketRef.current.on("roomNotFound", () => {
+      sessionStorage.removeItem('roomID');
+      navigate("/");
+    });
+
     socketRef.current.on("connect", () => {
       setIsConnecting(false);
+      setIsSocketConnected(true);
       setLostConnection(false);
       reRegisterPlayer(); // Ensure server knows who we are after a reconnect
     });
 
     socketRef.current.on("disconnect", (reason) => {
       setDisconnectReason(reason);
+      setIsSocketConnected(false);
       // Don't show "Lost Connection" immediately for "io client disconnect" 
       // which happens when we manually close it or background it.
       if (reason !== "io client disconnect") {
@@ -144,9 +157,9 @@ export default function GameRoom() {
         </Grid>
 
         <Grid item xs={12}>
-          {room && room.round > 0 && !room.inRound && (
+          {room && room.round > 0 && !room.inRound && isSocketConnected && (
             <Card sx={cardStyle}>
-              <WordCloud room={room} />
+              <WordCloud room={room} socket={socketRef.current} playerID={socketRef.current?.id} />
             </Card>
           )}
         </Grid>
@@ -160,7 +173,7 @@ export default function GameRoom() {
         </Grid>
 
         <Grid item xs={12} md={4}>
-          {room && (
+          {room && isSocketConnected && (
             <Card sx={cardStyle}>
               <ScoreBoard 
                 room={room} 
@@ -172,7 +185,7 @@ export default function GameRoom() {
         </Grid>
 
         <Grid item xs={12} md={4}>
-          {room && room.round === 0 && socketRef.current?.id === room.ownerID && (
+          {room && room.round === 0 && isSocketConnected && socketRef.current?.id === room.ownerID && (
             <Card sx={cardStyle}>
               <GameParameters room={room} emitStart={emitStart} />
             </Card>
