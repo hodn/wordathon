@@ -47,11 +47,18 @@ export default function GameRoom() {
   useEffect(() => {
     const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001';
     
-    // 1. Setup Socket with reconnection attempts enabled
+    // 1. Setup Socket with robust reconnection settings
     socketRef.current = io(apiUrl, {
-      reconnectionAttempts: 5,
-      timeout: 10000,
+      reconnectionAttempts: 25,
+      reconnectionDelay: 1000,
+      reconnectionDelayMax: 5000,
+      timeout: 20000,
     }); 
+
+    // Keep Render free tier awake by pinging /health every 4 minutes while in room
+    const pingInterval = setInterval(() => {
+      fetch(`${apiUrl}/health`).catch(() => {});
+    }, 4 * 60 * 1000);
 
     // 2. Persistent Identity Logic
     if (location.state?.playerName) {
@@ -126,6 +133,7 @@ export default function GameRoom() {
     document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
+      clearInterval(pingInterval);
       document.removeEventListener("visibilitychange", handleVisibilityChange);
       if (socketRef.current) socketRef.current.disconnect();
     };

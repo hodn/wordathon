@@ -18,16 +18,21 @@ export default function EndDialog(props) {
 
     const getBestPlayer = (room) => {
         const list = [];
-
-        for (const playerID in room.players) {
-            list.push(room.players[playerID]);
+        if (room && room.players) {
+            for (const playerID in room.players) {
+                if (room.players[playerID]) {
+                    list.push(room.players[playerID]);
+                }
+            }
         }
-
         list.sort((a, b) => b.points - a.points);
-
-        return list[0];
-
+        return list[0] || null;
     }
+
+    const bestPlayer = getBestPlayer(room);
+    const totalWords = room && Array.isArray(room.wordPool)
+        ? room.wordPool.reduce((total, pool) => total + (pool ? Object.keys(pool).length : 0), 0)
+        : 0;
 
     return (
 
@@ -41,10 +46,10 @@ export default function EndDialog(props) {
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        {room ? getBestPlayer(room).name : 'N/A'} won with {room ? getBestPlayer(room).points : 'N/A'} points!
+                        {bestPlayer ? `${bestPlayer.name} won with ${bestPlayer.points} points!` : 'Game has ended!'}
                     </DialogContentText>
                     <DialogContentText sx={{ marginTop: 2 }}>
-                        A total of {room ? room.wordPool.reduce((total, pool) => total + Object.keys(pool).length, 0) : 0} unique words were found across all rounds.
+                        A total of {totalWords} unique words were found across all rounds.
                     </DialogContentText>
                     <DialogContentText sx={{ marginTop: 1, fontStyle: 'italic' }}>
                         Check out the word cloud summary below!
