@@ -10,22 +10,29 @@ export default function WordCloud(props) {
     const { room, socket, playerID } = props;
 
     const words = useMemo(() => {
-        let usedWords = room.roundWordPool;
+        let usedWords = room.roundWordPool || {};
 
         // At the end of the whole game, show words from all rounds
         if (room.round === room.settings.numberOfRounds && !room.inRound) {
             usedWords = Object.create(null);
-            room.wordPool.forEach(pool => {
+            (room.wordPool || []).forEach(pool => {
+                if (!pool) return;
                 for (const [key, info] of Object.entries(pool)) {
                     if (!usedWords[key]) {
                         usedWords[key] = {
-                            players: [...info.players],
+                            players: [...(info.players || [])],
+                            playerNames: [...(info.playerNames || [])],
                             definition: info.definition
                         };
                     } else {
-                        info.players.forEach(p => {
+                        (info.players || []).forEach(p => {
                             if (!usedWords[key].players.includes(p)) {
                                 usedWords[key].players.push(p);
+                            }
+                        });
+                        (info.playerNames || []).forEach(name => {
+                            if (!usedWords[key].playerNames.includes(name)) {
+                                usedWords[key].playerNames.push(name);
                             }
                         });
                     }
@@ -35,14 +42,38 @@ export default function WordCloud(props) {
 
         const wordsArr = [];
         for (const [key, info] of Object.entries(usedWords)) {
+            // Resolve player nicknames
+            let playerNames = [];
+            if (Array.isArray(info.playerNames) && info.playerNames.length > 0) {
+                playerNames = [...info.playerNames];
+            } else if (Array.isArray(info.players) && room.players) {
+                playerNames = info.players
+                    .map(id => room.players[id]?.name)
+                    .filter(Boolean);
+            }
+            if (playerNames.length === 0) {
+                playerNames = info.players && info.players.length > 0 
+                    ? info.players.map(id => room.players?.[id]?.name || "Anonymous")
+                    : ["Anonymous"];
+            }
+
+            // Deduplicate names for display
+            const uniqueNames = Array.from(new Set(playerNames));
+
             wordsArr.push({
                 text: key,
-                count: info.players.length,
-                definition: Array.isArray(info.definition) ? info.definition.join(', ') : info.definition
+                count: (info.players && info.players.length) || uniqueNames.length,
+                playerNames: uniqueNames,
+                definition: Array.isArray(info.definition) ? info.definition.join(', ') : (info.definition || "")
             });
         }
-        // Sort by count (most popular first) then alphabetically
-        return wordsArr.sort((a, b) => b.count - a.count || a.text.localeCompare(b.text));
+
+        // Sort by longest first (or highest points essentially), then by count, then alphabetically
+        return wordsArr.sort((a, b) => 
+            b.text.length - a.text.length || 
+            b.count - a.count || 
+            a.text.localeCompare(b.text)
+        );
     }, [room]);
 
     const isGameEnded = room.round === room.settings.numberOfRounds;
@@ -90,26 +121,93 @@ export default function WordCloud(props) {
                     sx={{ p: 1 }}
                 >
                     {words.map((word) => (
-                        <Tooltip 
-                            key={word.text} 
-                            title={word.definition} 
-                            arrow 
-                            placement="top"
-                            enterTouchDelay={0}
-                            leaveTouchDelay={3000}
-                        >
-                            <Chip
-                                label={`${word.text} (${word.count})`}
-                                color={word.count > 1 ? "primary" : "default"}
-                                variant={word.count > 1 ? "filled" : "outlined"}
-                                sx={{ 
-                                    fontSize: word.count > 1 ? '1.1rem' : '0.9rem',
-                                    fontWeight: word.count > 1 ? 'bold' : 'normal',
-                                    m: 0.5,
-                                    cursor: 'pointer'
-                                }}
-                            />
-                        </Tooltip>
+                        <Chip
+                            key={word.text}
+                            color={word.text.length > 4 ? "primary" : "default"}
+                            variant={word.count > 1 ? "filled" : "outlined"}
+                            sx={{ 
+                                fontSize: word.text.length > 4 ? '1.05rem' : '0.9rem',
+                                fontWeight: word.text.length > 4 ? 'bold' : 'normal',
+                                m: 0.6,
+                                height: 'auto',
+                                py: 0.4,
+                                '& .MuiChip-label': {
+                                    display: 'inline-flex',
+                                    alignItems: 'center',
+                                    gap: 1,
+                                    px: 1.2
+                                }
+                            }}
+                            label={
+                                <>
+                                    <Tooltip 
+                                        title={word.definition || "No definition available"} 
+                                        arrow 
+                                        placement="top"
+                                        enterTouchDelay={0}
+                                        leaveTouchDelay={3000}
+                                    >
+                                        <Box 
+                                            component="span" 
+                                            sx={{ 
+                                                cursor: 'pointer',
+                                                display: 'inline-flex',
+                                                alignItems: 'center'
+                                            }}
+                                        >
+                                            {word.text}
+                                        </Box>
+                                    </Tooltip>
+
+                                    <Tooltip 
+                                        title={
+                                            <Box sx={{ p: 0.5, textAlign: 'center' }}>
+                                                <Typography variant="caption" sx={{ fontWeight: 'bold', display: 'block', mb: 0.2 }}>
+                                                    {word.playerNames.length === 1 ? 'Entered by:' : `Entered by (${word.playerNames.length}):`}
+                                                </Typography>
+                                                <Typography variant="body2" sx={{ fontSize: '0.85rem' }}>
+                                                    {word.playerNames.join(', ')}
+                                                </Typography>
+                                            </Box>
+                                        }
+                                        arrow 
+                                        placement="top"
+                                        enterTouchDelay={0}
+                                        leaveTouchDelay={3000}
+                                    >
+                                        <Box
+                                            component="span"
+                                            onClick={(e) => e.stopPropagation()}
+                                            sx={{ 
+                                                display: 'inline-flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                minWidth: '22px',
+                                                height: '22px',
+                                                borderRadius: '11px',
+                                                px: 0.6,
+                                                fontSize: '0.75rem',
+                                                fontWeight: 'bold',
+                                                bgcolor: word.count > 1 
+                                                    ? 'rgba(255, 255, 255, 0.35)' 
+                                                    : 'rgba(0, 0, 0, 0.1)',
+                                                color: 'inherit',
+                                                cursor: 'pointer',
+                                                transition: 'transform 0.15s, background-color 0.15s',
+                                                '&:hover': {
+                                                    transform: 'scale(1.2)',
+                                                    bgcolor: word.count > 1 
+                                                        ? 'rgba(255, 255, 255, 0.55)' 
+                                                        : 'rgba(0, 0, 0, 0.2)',
+                                                }
+                                            }}
+                                        >
+                                            {word.count}
+                                        </Box>
+                                    </Tooltip>
+                                </>
+                            }
+                        />
                     ))}
                 </Stack>
             ) : (
@@ -120,3 +218,4 @@ export default function WordCloud(props) {
         </Box>
     );
 }
+
